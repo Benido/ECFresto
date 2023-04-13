@@ -14,39 +14,8 @@
         {% endblock %}
     </head>
     <body style="width: 100vw; height: 100vh; margin: 0; padding: 0">
-        {% block header %}
-            <header style="display: flex; justify-content: center; width: 100%">
-                <div style="
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            min-width: 50%;
-            background: lightblue">
-                    <div style="font-size: 3rem"><a href="{{  path('app_homepage') }}">LOGO</a></div>
-                    <div style="font-size: 1.5rem">
-                        <ul style="display: flex; list-style: none">
-                            <li style="margin:1rem"><a href="{{  path('app_le_restaurant') }}">LE RESTAURANT</a></li>
-                            <li style="margin:1rem"><a href="{{  path('app_la_carte') }}">LA CARTE</a></li>
-                            <li style="margin:1rem"><a href="{{  path('app_reservation') }}">RESERVATION</a></li>
-                            <li style="margin:1rem"><a href="">CONNEXION</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </header>{% endblock %}
+        {% include 'fragments/header.html.twig' %}
         {% block body %}{% endblock %}
-        {% block footer %}
-            <footer style="display: flex; justify-content: center; width: 100%">
-                <div style="
-            display: flex;
-            flex-direction: column;
-            justify-content: space-around;
-            align-items: center;
-            min-width: 50%;
-            background: lightblue">
-                    <div style="font-size: 3rem">LOGO</div>
-                    <div style="font-size: 2rem">Adresse</div>
-                    <div style="font-size: 2rem">Horaires</div>
-                </div>
-            </footer>{% endblock %}
+        {% include 'fragments/footer.html.twig' %}
     </body>
 </html>
