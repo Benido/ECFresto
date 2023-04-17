@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\User;
+use App\Entity\Client;
 use App\Form\RegistrationFormType;
 use App\Security\UserAuthenticator;
 use Doctrine\ORM\EntityManagerInterface;
@@ -19,25 +19,25 @@ class RegistrationController extends AbstractController
     #[Route('/register', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, UserAuthenticator $authenticator, EntityManagerInterface $entityManager): Response
     {
-        $user = new User();
-        $form = $this->createForm(RegistrationFormType::class, $user);
+        $client = new Client();
+        $form = $this->createForm(RegistrationFormType::class, $client);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
-            $user->setPassword(
+            $client->setPassword(
                 $userPasswordHasher->hashPassword(
-                    $user,
+                    $client,
                     $form->get('plainPassword')->getData()
                 )
             );
-
-            $entityManager->persist($user);
+            $client->setRoles(['ROLE_USER']);
+            $entityManager->persist($client);
             $entityManager->flush();
             // do anything else you need here, like send an email
 
             return $userAuthenticator->authenticateUser(
-                $user,
+                $client,
                 $authenticator,
                 $request
             );

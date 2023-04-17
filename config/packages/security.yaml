@@ -19,7 +19,7 @@ security:
                 property: email
         master_provider:
             chain:
-                providers: [ admin, client]
+                providers: [ client, admin]
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
