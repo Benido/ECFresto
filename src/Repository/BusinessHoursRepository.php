@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\BusinessHours;
+use App\Enum\Weekdays;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -47,6 +48,33 @@ class BusinessHoursRepository extends ServiceEntityRepository
             $weeklyScheduleDraft[] = $businessHours->getFormattedBusinessHours();
         }
         return $weeklyScheduleDraft;
+    }
+
+    public function getFormattedWeeklySchedule(): array
+    {
+
+        //Compose le tableau final représentant le planning hebdomadaire
+        $formattedWeeklySchedule = [];
+        foreach (Weekdays::values() as $day ) {
+            $formattedWeeklySchedule[$day] = $this->dailyFormatter($day, $this->findAllAndStringify());
+        }
+
+        return $formattedWeeklySchedule;
+    }
+
+    //Formate les horaires d'ouvertures selon le jour de la semaine
+    private function dailyFormatter(string $day, array $Draft ): array
+    {
+
+        $temp_array[] = array_filter($Draft, fn($a) => in_array($day, $a));
+        $temp_array = array_merge(...$temp_array);
+        $dailyHours = [];
+        foreach($temp_array as $array) {
+            //$dailyHours[] = $array[1][0] === null ? 'fermé' : $array[1];   pour l'instant géré par twig
+            $dailyHours[] = $array[1];
+            //echo '<pre>'; var_dump($array[1]); echo '</pre>';
+        }
+        return $dailyHours;
     }
 
 //    /**
