@@ -12,5 +12,18 @@
 
     <h3>votre email: {{  app.user.email }}</h3>
     <h3>votre role: {{ app.user.roles | join }}</h3>
+
+    <h2>Horaires d'ouverture</h2>
+    {% for key, hours in formatted_weekly_schedule %}
+        {{ key }} :
+        {% for hour in hours %}
+            {% if not hour.1 %}
+              fermé
+            {% else %}
+                {{ hour.0 }} - {{ hour.1}}
+            {% endif %}
+        {% endfor%}
+        <br>
+    {% endfor %}
 </div>
 {% endblock %}
