@@ -1,0 +1,6 @@
+@import '~bootstrap';
+
+body {
+    font-family: sans-serif;
+    background-color: lightgray;
+}

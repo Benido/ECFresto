@@ -18,6 +18,8 @@
                 {% endif %}
                 {% if not app.user %}
                 <li style="margin:1rem"><a href="{{  path('app_register') }}">CREER UN COMPTE</a></li>
+                {% elseif is_granted('ROLE_ADMIN') %}
+                <li style="margin:1rem"><a href="{{  path('app_administration') }}">PANNEAU D'ADMINISTRATION</a></li>
                 {% endif %}
             </ul>
         </div>
