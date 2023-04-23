@@ -7,23 +7,26 @@
     .example-wrapper { max-width: 800px; width: 95%;  }
 </style>
 
-<div class="example-wrapper w-100 m-auto p-3 bg-secondary ">
-    <h1 class="text-danger">Panneau d'administration</h1>
-
-    <h3>votre email: {{  app.user.email }}</h3>
-    <h3>votre rôle: {{ app.user.roles | join }}</h3>
-    <div id="businessHours">
+<div id="dashboard-wrapper" class="example-wrapper w-100 m-auto p-3 ">
+    <div class="bg-secondary p-3 m-3">
+        <h1 class="text-danger">Panneau d'administration</h1>
+        <h3>votre email: {{ app.user.email }}</h3>
+        <h3>votre rôle: {{ app.user.roles | join }}</h3>
+    </div>
+    <div id="businessHours" class="p-3 m-3 bg-light ">
     <h2>Horaires d'ouverture</h2>
     {% for key, hours in formatted_weekly_schedule %}
-        {{ key }} :
-        {% for hour in hours %}
-            {% if not hour.1 %}
-              fermé
-            {% else %}
-                {{ hour.0 }} - {{ hour.1}}
-            {% endif %}
-        {% endfor%}
-        <button>modifier</button>
+        <div>
+            {{ key }} :
+            {% for hour in hours %}
+                {% if not hour.0 %}
+                <div class="d-inline">fermé</div>
+                {% else %}
+                <div class="d-inline"> {{ hour.0 }} - {{ hour.1}} </div>
+                {% endif %}
+            {% endfor%}
+            <button class="d-inline">modifier</button>
+        </div>
         <br>
     {% endfor %}
     </div>

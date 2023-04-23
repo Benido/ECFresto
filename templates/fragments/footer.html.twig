@@ -19,7 +19,7 @@
             {% for key, hours in weeklyBusinessHours %}
                 {{ key }} :
                 {% for hour in hours %}
-                    {% if not hour.1 %}
+                    {% if not hour.0 %}
                         fermé
                     {% else %}
                         {{ hour.0 }} - {{ hour.1}}

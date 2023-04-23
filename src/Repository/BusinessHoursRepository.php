@@ -77,6 +77,22 @@ class BusinessHoursRepository extends ServiceEntityRepository
         return $dailyHours;
     }
 
+    //Supprime les entrées pour un jour donné avant de soumettre les nouveaux horaires
+    public function removeAndSaveNew (Array $newHours): void
+    {
+        //Supprime les entrées correspondant au jour des nouvelles entrées
+        $weekday = $newHours[0]->getWeekdayString();
+        $hoursToRemove = $this->findBy(array('weekday' => $weekday));
+        foreach ($hoursToRemove as $hourItem) {
+            $this->remove($hourItem);
+        }
+        //Ajoute les nouvelles entrées
+        foreach ($newHours as $newHourItem) {
+            $this->getEntityManager()->persist($newHourItem);
+        }
+        $this->getEntityManager()->flush();
+    }
+
 //    /**
 //     * @return BusinessHours[] Returns an array of BusinessHours objects
 //     */
