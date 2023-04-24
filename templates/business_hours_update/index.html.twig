@@ -3,46 +3,48 @@
 {% block title %}Hello BusinessHoursUpdateController!{% endblock %}
 
 {% block body %}
-    <div>
-    <h3>Horaires d'ouverture</h3>
-    {% for key, hours in weeklyBusinessHours %}
-        {{ key }} :
-        {% for hour in hours %}
-            {% if not hour.0 %}
-                fermé
-            {% else %}
-                {{ hour.0 }} - {{ hour.1}}
-            {% endif %}
-        {% endfor%}
-        <br>
-    {% endfor %}
-    </div>
-
-    <div>
-        {{ form_start(BusinessHoursUpdate) }}
-
-        {# Version sans Stimulus
-
-        <ul class="BusinessHoursUpdate"
-            data-index="{{ BusinessHoursUpdate.BusinessHoursFormType|length > 0 ? BusinessHoursUpdate|last.vars.name + 1 : 0 }}"
-            data-prototype="{{ form_widget(BusinessHoursUpdate.BusinessHoursFormType.vars.prototype)|e('html_attr') }}"
-        ></ul>
-        <button type="button" class="add_item_link" data-collection-holder-class="BusinessHoursUpdate">Ajouter</button>
-        #}
-
-        <div {{ stimulus_controller('form-collection') }}
-                data-form-collection-index-value="{{ BusinessHoursUpdate.BusinessHoursFormType|length > 0 ? BusinessHoursUpdate.BusinessHoursFormType|last.vars.name + 1 : 0 }}"
-                data-form-collection-prototype-value="{{ form_widget(BusinessHoursUpdate.BusinessHoursFormType.vars.prototype)|e('html_attr') }}"
-        >
-            <ul {{ stimulus_target('form-collection', 'collectionContainer') }}></ul>
-            <div>
-                <label for="isClosed">fermé pour la journée</label>
-                <input type="checkbox" id="isClosed" name="isClosed">
+    <div class="container">
+        <div class="row">
+            <div class="col justify-content-center p-3" >
+                <h3>Horaires d'ouverture</h3>
+                <div class="">
+                {% for key, hours in weeklyBusinessHours %}
+                    <div {{ stimulus_controller('form-reveal') }}
+                            data-form-reveal-weekday-value = {{ key }}
+                    >
+                        {{ key }} :
+                        {% for hour in hours %}
+                                {% if not hour.0 %}
+                                    fermé
+                                {% else %}
+                                    {{ hour.0 }} - {{ hour.1}}
+                                {% endif %}
+                        {% endfor%}
+                    <button type="button" class="edit" {{ stimulus_action('form-reveal', 'revealForm') }} >Editer</button>
+                    </div>
+                {% endfor %}
+                </div>
             </div>
-            <button type="button" {{ stimulus_action('form-collection', 'addCollectionElement') }}>Ajouter</button>
-        </div>
 
-        {{ form_end(BusinessHoursUpdate) }}
+            {# Le formulaire d'édition des horaires d'ouverture, masqué au chargement de la page #}
+            <div id="form" class="col " hidden  >
+                {{ form_start(BusinessHoursUpdate) }}
+                <div id="formContainer" {{ stimulus_controller('form-collection') }}
+                        data-form-collection-index-value="{{ BusinessHoursUpdate.BusinessHoursFormType|length > 0 ? BusinessHoursUpdate.BusinessHoursFormType|last.vars.name + 1 : 0 }}"
+                        data-form-collection-prototype-value="{{ form_widget(BusinessHoursUpdate.BusinessHoursFormType.vars.prototype)|e('html_attr') }}"
+                        data-form-collection-weekday-value=""
+                >
+                    <ul {{ stimulus_target('form-collection', 'collectionContainer') }}></ul>
+                    <div>
+                        <label for="isClosed">fermé pour la journée</label>
+                        <input type="checkbox" id="isClosed" name="isClosed">
+                    </div>
+                    <button type="button" id="add"{{ stimulus_action('form-collection', 'addCollectionElement') }}>Ajouter</button>
+                </div>
+
+                {{ form_end(BusinessHoursUpdate) }}
+            </div>
+        </div>
     </div>
 
 {% endblock %}

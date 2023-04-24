@@ -80,6 +80,7 @@ class BusinessHoursRepository extends ServiceEntityRepository
     //Supprime les entrées pour un jour donné avant de soumettre les nouveaux horaires
     public function removeAndSaveNew (Array $newHours): void
     {
+        //echo '<pre>', var_dump($newHours), '</pre>';
         //Supprime les entrées correspondant au jour des nouvelles entrées
         $weekday = $newHours[0]->getWeekdayString();
         $hoursToRemove = $this->findBy(array('weekday' => $weekday));

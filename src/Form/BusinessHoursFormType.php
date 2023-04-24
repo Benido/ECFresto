@@ -5,7 +5,6 @@ namespace App\Form;
 use App\Entity\BusinessHours;
 use App\Enum\Weekdays;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EnumType;
 use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -19,26 +18,33 @@ class BusinessHoursFormType extends AbstractType
             ->add(
                 'weekday',
                 EnumType::class,
-                ['class' => Weekdays::class]
+                ['class' => Weekdays::class,
+                 'label' => false,
+                 'attr' => [
+                     'class' => 'weekday',
+                     'hidden' => ''
+                 ]
+                ]
             )
             ->add(
                 'openingHour',
                 TimeType::class,
                     [
-                        'input' => 'datetime',
+                    'input' => 'datetime',
                     'widget' => 'choice',
                     'minutes'=> ['00', '15', '30', '45'],
+                    'label' => 'heure d\'ouverture',
                     'attr' => ['class' => 'select']
                     ]
-
             )
             ->add(
                 'closingHour',
                 TimeType::class,
                     [
-                        'input' => 'datetime',
+                    'input' => 'datetime',
                     'widget' => 'choice',
                     'minutes'=> ['00', '15', '30', '45'],
+                    'label' => 'heure de fermeture',
                     'attr' => ['class' => 'select']
                     ]
                 )
