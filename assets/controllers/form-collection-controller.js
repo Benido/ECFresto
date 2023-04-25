@@ -15,14 +15,19 @@ export default class extends Controller {
     addCollectionElement()
     {
         //On limite à 3 le nombre de formulaires
-        console.log(this.collectionContainerTarget.childElementCount)
-        if( this.collectionContainerTarget.childElementCount < 3)
+        if( this.collectionContainerTarget.childElementCount < 4)
         {
             const item = document.createElement('li');
+            item.classList.add('list-group-item', 'p-1', 'my-1', 'hideable')
             item.innerHTML = this.prototypeValue.replace(/__name__/g, this.indexValue);
             this.addRemoveButton(item)
             this.setClosed()
             this.collectionContainerTarget.appendChild(item);
+            if (this.collectionContainerTarget.childElementCount === 1) {
+                const weekdayLabel = document.createElement('h5')
+                weekdayLabel.innerText = this.weekdayValue
+                this.collectionContainerTarget.prepend(weekdayLabel)
+            }
             this.setWeekdayValue()
             this.indexValue++;
         }
@@ -36,25 +41,32 @@ export default class extends Controller {
         removeButton.addEventListener('click', () => item.remove())
     }
 
-    //Ecoute le statut de la checkbox "fermé pour la journée"
+    //Vérifie si la checkbox est cochée et le cas échéant, passe la valeur des inputs à null et leur attribut disabled à true
     setClosed() {
-        const checkIsClosedInput = document.getElementById('isClosed')
-        checkIsClosedInput.addEventListener('change', this.setInputValuesToNull )
+        const checkbox = document.getElementById('isClosed')
+        checkbox.addEventListener('change', this.isClosedHandler)
     }
 
-    //Vérifie si la checkbox est cochée et le cas échéant, passe la valeur des inputs à null et leur attribut disabled à true
-    setInputValuesToNull() {
+    //handler de isClosed()
+    isClosedHandler() {
         const checkbox = document.getElementById('isClosed')
+        const addButton = document.getElementById('add')
+        const forms = document.getElementsByClassName('hideable')
         const selectInputs = document.querySelectorAll('div.select > select')
-        if(checkbox.checked) {
+
+        if (checkbox.checked) {
+            addButton.setAttribute('hidden', '')
+            for (const child of forms) {
+                child.setAttribute('hidden', '')
+            }
             for (const input of selectInputs) {
-                //mets les valeurs à null et active l'attribut "disabled"
+                //mets la valeur des select à null
                 input.value = null
-                input.setAttribute('disabled', 'true')
             }
         } else {
-            for (const input of selectInputs) {
-                input.removeAttribute('disabled')
+            addButton.removeAttribute('hidden')
+            for (const child of forms) {
+                child.removeAttribute('hidden')
             }
         }
     }

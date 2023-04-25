@@ -23,7 +23,6 @@
                         {% else %}
                              fermé
                         {% endif %}
-
                     <button type="button" class="edit" {{ stimulus_action('form-reveal', 'revealForm') }} >Editer</button>
                     </div>
                 {% endfor %}
@@ -38,7 +37,7 @@
                         data-form-collection-prototype-value="{{ form_widget(BusinessHoursUpdate.BusinessHoursFormType.vars.prototype)|e('html_attr') }}"
                         data-form-collection-weekday-value=""
                 >
-                    <ul {{ stimulus_target('form-collection', 'collectionContainer') }}></ul>
+                    <ul id="listContainer" class="list-group" {{ stimulus_target('form-collection', 'collectionContainer') }}></ul>
                     <div>
                         <label for="isClosed">fermé pour la journée</label>
                         <input type="checkbox" id="isClosed" name="isClosed">
