@@ -32,6 +32,7 @@ class BusinessHoursFormType extends AbstractType
                     [
                     'input' => 'datetime',
                     'widget' => 'choice',
+                    'data' => new \DateTime('7:00'),
                     'minutes'=> ['00', '15', '30', '45'],
                     'label' => 'heure d\'ouverture',
                     'attr' => ['class' => 'select']
@@ -43,6 +44,7 @@ class BusinessHoursFormType extends AbstractType
                     [
                     'input' => 'datetime',
                     'widget' => 'choice',
+                        'data' => new \DateTime('15:00'),
                     'minutes'=> ['00', '15', '30', '45'],
                     'label' => 'heure de fermeture',
                     'attr' => ['class' => 'select']

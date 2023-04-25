@@ -3,6 +3,9 @@
 {% block title %}Hello BusinessHoursUpdateController!{% endblock %}
 
 {% block body %}
+    <div>
+        <a href="{{ path('app_administration') }}">Retour</a>
+    </div>
     <div class="container">
         <div class="row">
             <div class="col justify-content-center p-3" >
@@ -13,13 +16,14 @@
                             data-form-reveal-weekday-value = {{ key }}
                     >
                         {{ key }} :
-                        {% for hour in hours %}
-                                {% if not hour.0 %}
-                                    fermé
-                                {% else %}
-                                    {{ hour.0 }} - {{ hour.1}}
-                                {% endif %}
-                        {% endfor%}
+                        {% if hours.0|first is not null %}
+                            {% for hour in hours %}
+                            {{ hour.0 }} - {{ hour.1}}
+                            {% endfor%}
+                        {% else %}
+                             fermé
+                        {% endif %}
+
                     <button type="button" class="edit" {{ stimulus_action('form-reveal', 'revealForm') }} >Editer</button>
                     </div>
                 {% endfor %}

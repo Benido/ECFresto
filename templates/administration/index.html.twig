@@ -3,32 +3,31 @@
 {% block title %}Panneau d'administration{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { max-width: 800px; width: 95%;  }
-</style>
-
-<div id="dashboard-wrapper" class="example-wrapper w-100 m-auto p-3 ">
-    <div class="bg-secondary p-3 m-3">
-        <h1 class="text-danger">Panneau d'administration</h1>
-        <h3>votre email: {{ app.user.email }}</h3>
-        <h3>votre rôle: {{ app.user.roles | join }}</h3>
-    </div>
-    <div id="businessHours" class="p-3 m-3 bg-light ">
-    <h2>Horaires d'ouverture</h2>
-    {% for key, hours in formatted_weekly_schedule %}
-        <div>
-            {{ key }} :
-            {% for hour in hours %}
-                {% if not hour.0 %}
-                <div class="d-inline">fermé</div>
-                {% else %}
-                <div class="d-inline"> {{ hour.0 }} - {{ hour.1}} </div>
-                {% endif %}
-            {% endfor%}
-            <button class="d-inline">modifier</button>
+<div id="dashboardWrapper" class="w-100 h-100 d-flex">
+    {{ include('fragments/admin_sidebar.html.twig')}}
+    <div id="contentWrapper" class="w-100">
+        <div class="bg-secondary w-100 h-25 p-3">
+            <h1 class="text-danger">Panneau d'administration</h1>
+            <h3>votre email: {{ app.user.email }}</h3>
+            <h3>votre rôle: {{ app.user.roles | join }}</h3>
         </div>
-        <br>
-    {% endfor %}
+        <a href="{{ path('app_business_hours_update') }}">
+            <div id="businessHours" class="p-3 bg-light">
+                <h2>Horaires d'ouverture</h2>
+                {% for key, hours in formatted_weekly_schedule %}
+                    <div>
+                        {{ key }} :
+                        {% if hours.0|first is not null %}
+                            {% for hour in hours %}
+                                {{ hour.0 }} - {{ hour.1 }}
+                            {% endfor %}
+                        {% else %}
+                            fermé
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+        </a>
     </div>
 </div>
 {% endblock %}

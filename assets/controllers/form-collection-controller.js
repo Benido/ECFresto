@@ -15,7 +15,8 @@ export default class extends Controller {
     addCollectionElement()
     {
         //On limite à 3 le nombre de formulaires
-        if( this.indexValue < 3)
+        console.log(this.collectionContainerTarget.childElementCount)
+        if( this.collectionContainerTarget.childElementCount < 3)
         {
             const item = document.createElement('li');
             item.innerHTML = this.prototypeValue.replace(/__name__/g, this.indexValue);

@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class BusinessHoursUpdateController extends AbstractController
 {
-    #[Route('/business-hours-update', name: 'app_business_hours_update')]
+    #[Route('/administration/business-hours-update', name: 'app_business_hours_update')]
     public function update(Request $request, BusinessHoursRepository $businessHoursRepository): Response
     {
         $form = $this->createForm(BusinessHoursUpdateType::class);

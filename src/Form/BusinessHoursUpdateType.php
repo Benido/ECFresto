@@ -22,6 +22,7 @@ class BusinessHoursUpdateType extends AbstractType
                 CollectionType::class,
                 [
                     'entry_type' => BusinessHoursFormType::class,
+                    'label' => false,
                     'entry_options' => ['label' => false],
                     'allow_add' => true,
                     'allow_delete' => true,
