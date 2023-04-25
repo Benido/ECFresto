@@ -18,13 +18,13 @@
             <h3>Horaires d'ouverture</h3>
             {% for key, hours in weeklyBusinessHours %}
                 {{ key }} :
-                {% for hour in hours %}
-                    {% if not hour.0 %}
-                        fermé
-                    {% else %}
+                {% if hours.0|first is not null %}
+                    {% for hour in hours %}
                         {{ hour.0 }} - {{ hour.1}}
-                    {% endif %}
-                {% endfor%}
+                    {% endfor%}
+                {% else %}
+                    fermé
+                {% endif %}
                 <br>
             {% endfor %}
         </div>

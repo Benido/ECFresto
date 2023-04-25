@@ -56,7 +56,11 @@ export default class extends Controller {
         if (checkbox.checked) {
             addButton.setAttribute('hidden', '')
             for (const child of forms) {
+                //garde un formulaire pour pouvoir transmettre les valeurs null, supprime les autres
                 child.setAttribute('hidden', '')
+                do {
+                    child.nextElementSibling.remove()
+                } while (child.nextElementSibling)
             }
             for (const input of selectInputs) {
                 //mets la valeur des select à null
