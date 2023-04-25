@@ -37,6 +37,7 @@
                         data-form-collection-prototype-value="{{ form_widget(BusinessHoursUpdate.BusinessHoursFormType.vars.prototype)|e('html_attr') }}"
                         data-form-collection-weekday-value=""
                 >
+                    <h5 id="weekdayDisplay"></h5>
                     <ul id="listContainer" class="list-group" {{ stimulus_target('form-collection', 'collectionContainer') }}></ul>
                     <div>
                         <label for="isClosed">fermé pour la journée</label>

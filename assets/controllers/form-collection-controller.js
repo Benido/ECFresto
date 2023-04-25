@@ -24,9 +24,8 @@ export default class extends Controller {
             this.setClosed()
             this.collectionContainerTarget.appendChild(item);
             if (this.collectionContainerTarget.childElementCount === 1) {
-                const weekdayLabel = document.createElement('h5')
+                const weekdayLabel = document.getElementById('weekdayDisplay')
                 weekdayLabel.innerText = this.weekdayValue
-                this.collectionContainerTarget.prepend(weekdayLabel)
             }
             this.setWeekdayValue()
             this.indexValue++;
