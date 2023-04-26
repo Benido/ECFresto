@@ -25,6 +25,10 @@ class BusinessHours
     #[ORM\Column(type: Types::TIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $closingHour = null;
 
+    #[ORM\ManyToOne(inversedBy: 'businessHours')]
+    #[ORM\JoinColumn(nullable: true)]
+    private ?Restaurant $restaurant = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -82,5 +86,17 @@ class BusinessHours
             )
         );
 
+    }
+
+    public function getRestaurant(): ?Restaurant
+    {
+        return $this->restaurant;
+    }
+
+    public function setRestaurant(?Restaurant $restaurant): self
+    {
+        $this->restaurant = $restaurant;
+
+        return $this;
     }
 }
