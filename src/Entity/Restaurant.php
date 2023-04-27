@@ -21,10 +21,10 @@ class Restaurant
 
     #[ORM\OneToMany(mappedBy: 'restaurant', targetEntity: BusinessHours::class)]
     private Collection $businessHours;
-    /*
-        #[ORM\OneToMany(mappedBy: 'restaurant', targetEntity: Reservation::class, orphanRemoval: true)]
-        private Collection $reservations;
 
+    #[ORM\OneToMany(mappedBy: 'restaurant', targetEntity: Reservation::class, orphanRemoval: true)]
+    private Collection $reservations;
+/*
         public function __construct()
         {
             $this->businessHours = new ArrayCollection();

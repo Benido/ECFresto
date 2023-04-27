@@ -28,6 +28,7 @@ class Client extends User
     #[ORM\OneToMany(mappedBy: 'client', targetEntity: Reservation::class)]
     private Collection $reservations;
 
+
     public function __construct()
     {
         $this->reservations = new ArrayCollection();
@@ -90,5 +91,10 @@ class Client extends User
         }
 
         return $this;
+    }
+
+    public function displayName(): string
+    {
+        return $this->getEmail();
     }
 }

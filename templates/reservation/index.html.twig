@@ -5,8 +5,12 @@
 {% block body %}
 <div class="">
     <h1>Réservation</h1>
-    <div>Hello {{ app.user.email }}</div>
-
-    <h4>Afficher réservations : </h4>
+    <div>
+    <h4>>Nouvelle réservation : </h4>
+        {{ form_start(reservation) }}
+        {{ form_widget(reservation) }}
+        {{ form_rest(reservation) }}
+        {{ form_end(reservation) }}
+    </div>
 </div>
 {% endblock %}
