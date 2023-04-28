@@ -23,7 +23,6 @@ class ReservationRepository extends ServiceEntityRepository
 
     public function save(Reservation $entity, bool $flush = false): void
     {
-        echo 'Repo ';
         dump($entity->getClient());
         $this->getEntityManager()->persist($entity);
 

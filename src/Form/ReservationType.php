@@ -8,12 +8,13 @@ use App\Entity\Restaurant;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -21,15 +22,21 @@ class ReservationType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        dump($options['client']);
         $builder
-            ->add(
-                'date',
-                DateTimeType::class,
-                [
-                    'widget' => 'single_text',
-                ]
-            )
+                ->add('day',
+                    DateType::class,
+                    [
+                        'property_path' => 'day',
+                        'widget' => 'single_text',
+                    ]
+                )
+                ->add('time',
+                    TimeType::class,
+                    [
+                        'property_path' => 'time',
+                        'input_format' => 'H:i'
+                    ]
+                )
             ->add('email',
                 EmailType::class,
                 [
@@ -38,10 +45,20 @@ class ReservationType extends AbstractType
                 ]
             )
             ->add('seats_number',
-                IntegerType::class,
+                ChoiceType::class,
                 [
                     //S'il est connecté, on récupère le nombre de couverts par défaut du client
                     'data' => $options['client']?->getDefaultSeatsNumber(),
+                    'choices'=> [
+                        '1' => 1,
+                        '2' => 2,
+                        '3' => 3,
+                        '4' => 4,
+                        '5' => 5,
+                        '6' => 6,
+                        '7' => 7,
+                        '8' => 8
+                    ]
                 ]
             )
             ->add(

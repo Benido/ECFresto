@@ -22,14 +22,17 @@ class ReservationController extends AbstractController
 
         //On créé un nouvel objet réservation et le formulaire qui va l'alimenter
         $reservation = new Reservation();
-        dump($this->getUser());
-        $form = $this->createForm(ReservationType::class, $reservation, ['restaurant' => $restaurant, 'client' => $this->getUser()?? null]);
+        $form = $this->createForm(ReservationType::class, $reservation,
+            [
+                'restaurant' => $restaurant,
+                'client' => $this->getUser()?? null,
+                'hours' => ['17:15' => '17:15', '17:30' => '17:30', '17:45'=> '17:45', '18:00'=>'18:00']
+            ]);
 
         $form->handleRequest($request) ;
         if ($form->isSubmitted() && $form->isValid()) {
             $reservation = $form->getData();
             $reservationRepository->save($reservation, true);
-            echo 'success !!!';
             return $this->redirectToRoute('app_reservation');
 
         }

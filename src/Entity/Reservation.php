@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ReservationRepository;
+use DateTime;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -36,19 +37,48 @@ class Reservation
     #[ORM\ManyToOne(inversedBy: 'reservations')]
     private ?Client $client = null;
 
+    public function __construct()
+    {
+        $this->date = new DateTime();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getDate(): ?\DateTimeInterface
+    public function getDate(): ?DateTime
     {
         return $this->date;
     }
 
-    public function setDate(\DateTimeInterface $date): self
+    public function setDate(DateTime $date): self
     {
         $this->date = $date;
+
+        return $this;
+    }
+
+    public function getDay(): ?DateTime
+    {
+        return new DateTime($this->date?->format('Y-m-d')) ;
+    }
+
+    public function setDay(DateTime $date): self
+    {
+        $this->date->setDate($date->format('Y'), $date->format('m'), $date->format('d')) ;
+
+        return $this;
+    }
+
+    public function getTime(): ?DateTime
+    {
+        return new DateTime($this->date?->format('H:i'));
+    }
+
+    public function setTime(\DateTimeInterface $time): self
+    {
+        $this->date->setTime($time->format('H'), $time->format('i')) ;
 
         return $this;
     }
