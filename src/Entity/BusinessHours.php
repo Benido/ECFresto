@@ -75,19 +75,6 @@ class BusinessHours
         return $this;
     }
 
-    //Return a formatted table of string values
-    public function getFormattedBusinessHours(): array
-    {
-        return array(
-            $this->getWeekdayString(),
-            array(
-                $this->getOpeningHour()?->format('H:i'),
-                $this->getClosingHour()?->format('H:i')
-            )
-        );
-
-    }
-
     public function getRestaurant(): ?Restaurant
     {
         return $this->restaurant;
@@ -98,5 +85,22 @@ class BusinessHours
         $this->restaurant = $restaurant;
 
         return $this;
+    }
+
+    //Return a formatted table of string values
+    public function getFormattedBusinessHours(): array
+    {
+        return [
+            $this->getWeekdayString(), [
+                $this->getOpeningHour()?->format('H:i'),
+                $this->getClosingHour()?->format('H:i')
+            ]
+        ];
+    }
+
+    //We substract one hour to the closing hour to get the last time slot
+    public function getLastTimeSlot(): ?\DateTimeInterface
+    {
+        return $this->getClosingHour()?->sub(new \DateInterval('PT1H'));
     }
 }

@@ -70,9 +70,7 @@ class BusinessHoursRepository extends ServiceEntityRepository
         $temp_array = array_merge(...$temp_array);
         $dailyHours = [];
         foreach($temp_array as $array) {
-            //$dailyHours[] = $array[1][0] === null ? 'fermé' : $array[1];   pour l'instant géré par twig
             $dailyHours[] = $array[1];
-            //echo '<pre>'; var_dump($array[1]); echo '</pre>';
         }
         return $dailyHours;
     }

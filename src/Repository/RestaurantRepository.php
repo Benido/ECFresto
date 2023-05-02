@@ -42,8 +42,8 @@ class RestaurantRepository extends ServiceEntityRepository
     public function getOne(): Restaurant
     {
         return $this->createQueryBuilder('r')
-            ->select('r')
-            ->from('App:Restaurant', 'r')
+            ->select()
+            //->from('App:Restaurant', 'r')
             ->getQuery()
             ->getOneOrNullResult();
     }

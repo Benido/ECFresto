@@ -8,9 +8,22 @@
     <div>
     <h4>>Nouvelle réservation : </h4>
         {{ form_start(reservation) }}
-        {{ form_widget(reservation) }}
-        {{ form_rest(reservation) }}
+            {{ form_row(reservation.seats_number) }}
+            {{ form_label(reservation.day) }}
+                <span data-controller="time-slot"><span data-action="change->time-slot#updateTimeSlots" >{{ form_widget(reservation.day) }}</span></span>
+            {{ form_rest(reservation) }}
         {{ form_end(reservation) }}
     </div>
+    {#
+    <div>
+        {% for item in day %}
+            <div>
+                {% for i in item %}
+                    {{ i|date('H:i') }} -
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+    #}
 </div>
 {% endblock %}

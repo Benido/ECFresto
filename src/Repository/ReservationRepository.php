@@ -23,7 +23,6 @@ class ReservationRepository extends ServiceEntityRepository
 
     public function save(Reservation $entity, bool $flush = false): void
     {
-        dump($entity->getClient());
         $this->getEntityManager()->persist($entity);
 
         if ($flush) {
@@ -38,6 +37,17 @@ class ReservationRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function getOccupancy(\DateTime $date,\DateTime $dateSub)
+    {
+        return $this->createQueryBuilder('r')
+            ->andWhere('r.date BETWEEN :dateSub AND :date')
+            ->setParameter('dateSub', $dateSub)
+            ->setParameter('date', $date)
+            ->select('SUM(r.seats_number)')
+            ->getQuery()
+            ->getSingleScalarResult();
     }
 
 //    /**
