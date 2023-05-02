@@ -5,12 +5,13 @@
 {% block body %}
 <div class="">
     <h1>Réservation</h1>
-    <div>
+    <div data-controller="time-slot">
     <h4>>Nouvelle réservation : </h4>
         {{ form_start(reservation) }}
-            {{ form_row(reservation.seats_number) }}
+            {{ form_label(reservation.seats_number) }}
+            <span data-action="change->time-slot#updateTimeSlots">{{ form_widget(reservation.seats_number) }}</span>
             {{ form_label(reservation.day) }}
-                <span data-controller="time-slot"><span data-action="change->time-slot#updateTimeSlots" >{{ form_widget(reservation.day) }}</span></span>
+                <span ><span data-action="change->time-slot#updateTimeSlots" >{{ form_widget(reservation.day) }}</span></span>
             {{ form_rest(reservation) }}
         {{ form_end(reservation) }}
     </div>

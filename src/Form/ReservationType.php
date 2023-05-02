@@ -110,27 +110,37 @@ class ReservationType extends AbstractType
             )
         ;
 
-        $formModifier = function(FormInterface $form, \DateTime $day) {
+        //Modificateur qui ajoute le champ montrant les créneaux horaires disponibles
+        $formModifier = function(FormInterface $form, \DateTime $day, int $seats) {
             $form->add('time', TimeTagsType::class,
             [
                 'label'=> false,
-                'day' => $day
+                'day' => $day,
+                'seats' => $seats,
             ]);
         };
 
+        //On ajoute le champ avec les données pré-inscrites
         $builder->addEventListener(
             FormEvents::PRE_SET_DATA,
             function (FormEvent $event) use ($formModifier) {
                 $data = $event->getData();
-                $formModifier($event->getForm(), $data->getDay());
+                $formModifier($event->getForm(), $data->getDay(), $data->getSeatsNumber());
             }
         );
 
-        $builder->get('day')->addEventListener(
-            FormEvents::POST_SUBMIT,
+        //On récupère les données entrées par l'utilisateur grâce à la requête Ajax
+        // lancée par le contrôleur Javascript time-slot-controller
+        $builder->addEventListener(
+            FormEvents::PRE_SUBMIT,
             function (FormEvent $event) use ($formModifier) {
-                $day = $event->getForm()->getData();
-                $formModifier($event->getForm()->getParent(), $day);
+                $data = $event->getData();
+                //On formate les données dans le format attendu par les propriétés correspondantes de l'Entité Réservation
+                $day = new \DateTime($data['day']);
+                $seats = $data['seats_number'];
+
+                //On remplace les valeurs des champs correspondants pour que le formulaire soit soumis au contrôleur PHP ReservationController
+                $formModifier($event->getForm(), $day, $seats);
             }
         );
     }

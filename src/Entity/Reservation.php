@@ -22,7 +22,7 @@ class Reservation
     private ?string $email = null;
 
     #[ORM\Column(type: Types::SMALLINT)]
-    private ?int $seats_number = null;
+    private ?int $seats_number = 1;
 
     #[ORM\Column(type: Types::ARRAY)]
     private array $allergens = [];

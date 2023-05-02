@@ -6,7 +6,6 @@ use App\Repository\BusinessHoursRepository;
 use App\Repository\ReservationRepository;
 use App\Repository\RestaurantRepository;
 use DateTime;
-use Symfony\Component\Validator\Constraints\Date;
 
 class AvailableReservationDateGetter
 {
@@ -17,10 +16,11 @@ class AvailableReservationDateGetter
         private RestaurantRepository $restaurantRepository)
     {}
 
-    public function getAvailableReservationDate(DateTime $inputDate): array
+    public function getAvailableReservationDate(DateTime $inputDate, int $seatsNumber): array
     {
-        //On récupère la capacité du restaurant
-        $maxCapacity = $this->restaurantRepository->getOne()->getMaxCapacity();
+        //On récupère la capacité du restaurant et on déduit le nombre de couverts entré par l'utilisateur
+        $maxCapacity = $this->restaurantRepository->getOne()->getMaxCapacity() - $seatsNumber;
+        //dump($seatsNumber, $maxCapacity);
 
         //On trouve le jour de la semaine
         $weekday = $this->getWeekday($inputDate);
@@ -56,7 +56,6 @@ class AvailableReservationDateGetter
                     $newSlot->add($interval15);
                     //On vérifie le taux d'occupation du restaurant avant d'ajouter le créneau
                     if ($this->checkOccupancy($maxCapacity, $newSlot, $interval45)) {
-                        //$timeSlotsSub[$newSlot->format('H:i')] = clone $newSlot;
                         $timeSlotsSub[$newSlot->format('H:i')] = $newSlot->format('H:i');
                     }
                 }

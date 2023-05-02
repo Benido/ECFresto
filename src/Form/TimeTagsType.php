@@ -20,7 +20,7 @@ class TimeTagsType extends AbstractType
                 'time',
                 ChoiceType::class,
                 [
-                    'choices' => $this->availableReservationDateGetter->getAvailableReservationDate($options['day']),
+                    'choices' => $this->availableReservationDateGetter->getAvailableReservationDate($options['day'], $options['seats']),
                     'expanded' => true,
                 ]
             )
@@ -37,6 +37,7 @@ class TimeTagsType extends AbstractType
     {
         $resolver->setDefaults([
             'day' => null,
+            'seats' => null,
 
         ]);
     }
