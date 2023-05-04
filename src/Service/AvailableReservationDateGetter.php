@@ -33,9 +33,13 @@ class AvailableReservationDateGetter
             $businessHours[$index] = [];
             $openingHour = $item->getOpeningHour();
             $lastTimeSlot = $item->getLastTimeSlot();
-            //On applique les horaires au jour donné et on les intègre au tableau
-            $businessHours[$index][] = $openingHour?->setDate($inputDate->format('Y'), $inputDate->format('m'),$inputDate->format('d'));
-            $businessHours[$index][] = $lastTimeSlot?->setDate($inputDate->format('Y'), $inputDate->format('m'),$inputDate->format('d'));
+            //On applique les horaires au jour donné, on modifie la date du jour si l'horaire dépasse minuit, et on les intègre au tableau
+            $openingHour?->setDate($inputDate->format('Y'), $inputDate->format('m'),$inputDate->format('d'));
+            if ($openingHour->format('H') <= 4) $openingHour->modify('+1 day');
+            $businessHours[$index][] = $openingHour;
+            $lastTimeSlot?->setDate($inputDate->format('Y'), $inputDate->format('m'),$inputDate->format('d'));
+            if ($lastTimeSlot->format('H') <= 4) $lastTimeSlot->modify('+1 day');
+            $businessHours[$index][] = $lastTimeSlot;
             $index++;
         }
 
@@ -51,18 +55,18 @@ class AvailableReservationDateGetter
                 if ($this->checkOccupancy($maxCapacity, $item[0], $interval45)) {
                     $timeSlotsSub[$item[0]->format('H:i')] = $item[0];
                 }
-                $newSlot = clone $item[0];
-                while ($newSlot < $item[1]) {
-                    $newSlot->add($interval15);
+                $tempSlot = clone $item[0];
+                while ($tempSlot < $item[1]) {
+                    $newSlot = clone $tempSlot->add($interval15);
                     //On vérifie le taux d'occupation du restaurant avant d'ajouter le créneau
                     if ($this->checkOccupancy($maxCapacity, $newSlot, $interval45)) {
-                        $timeSlotsSub[$newSlot->format('H:i')] = $newSlot->format('H:i');
+                        $timeSlotsSub[$newSlot->format('H:i')] = $newSlot;
                     }
                 }
                 $timeSlots[] = $timeSlotsSub;
             }
         }
-        //dump($timeSlots);
+        dump(array_values($timeSlots));
         return $timeSlots;
     }
 

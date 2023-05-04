@@ -26,7 +26,9 @@ class ReservationController extends AbstractController
         $form = $this->createForm(ReservationType::class, $reservation,
             [
                 'restaurant' => $restaurant,
-                'client' => $this->getUser()?? null,
+                'client' => ($this->getUser() !== null && in_array('ROLE_CLIENT',$this->getUser()->getRoles())) ?
+                    $this->getUser()
+                    : null,
             ]);
 
         $form->handleRequest($request) ;

@@ -52,8 +52,9 @@ class Reservation
         return $this->date;
     }
 
-    public function setDate(DateTime $date): self
+    public function setDate(?DateTime $date): self
     {
+        if (null !== $date)
         $this->date = $date;
 
         return $this;

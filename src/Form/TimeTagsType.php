@@ -7,6 +7,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class TimeTagsType extends AbstractType
@@ -17,7 +19,7 @@ class TimeTagsType extends AbstractType
     {
         $builder
             ->add(
-                'time',
+                'date',
                 ChoiceType::class,
                 [
                     'choices' => $this->availableReservationDateGetter->getAvailableReservationDate($options['day'], $options['seats']),
@@ -26,12 +28,16 @@ class TimeTagsType extends AbstractType
             )
             ->addModelTransformer(new CallbackTransformer(
                 function($dateTimeToArray){
-                    return [$dateTimeToArray->format('H:i')];
+                    return [$dateTimeToArray];
                 },
                 function($arrayToDateTime){
-                    return new \Datetime($arrayToDateTime['time']);
+                    return ($arrayToDateTime['date']);
                 },
             ));
+
+        $builder->addEventListener(FormEvents::SUBMIT, function(FormEvent $event){
+            //dump($event->getData());
+        });
     }
     public function configureOptions(OptionsResolver $resolver): void
     {

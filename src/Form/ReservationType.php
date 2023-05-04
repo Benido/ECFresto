@@ -11,6 +11,7 @@ use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\ResetType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -33,14 +34,14 @@ class ReservationType extends AbstractType
                     //S'il est connecté, on récupère le nombre de couverts par défaut du client
                     'data' => $options['client']?->getDefaultSeatsNumber(),
                     'choices'=> [
-                        '1' => 1,
-                        '2' => 2,
-                        '3' => 3,
-                        '4' => 4,
-                        '5' => 5,
-                        '6' => 6,
-                        '7' => 7,
-                        '8' => 8
+                        '1 couvert' => 1,
+                        '2 couverts' => 2,
+                        '3 couverts' => 3,
+                        '4 couverts' => 4,
+                        '5 couverts' => 5,
+                        '6 couverts' => 6,
+                        '7 couverts' => 7,
+                        '8 couverts' => 8
                     ]
                 ]
             )
@@ -105,14 +106,14 @@ class ReservationType extends AbstractType
                 ]
             )
             ->add(
-                'submit',
-                SubmitType::class
+                'submit',SubmitType::class
             )
+            ->add('reset', ResetType::class)
         ;
 
         //Modificateur qui ajoute le champ montrant les créneaux horaires disponibles
         $formModifier = function(FormInterface $form, \DateTime $day, int $seats) {
-            $form->add('time', TimeTagsType::class,
+            $form->add('date', TimeTagsType::class,
             [
                 'label'=> false,
                 'day' => $day,
@@ -141,6 +142,14 @@ class ReservationType extends AbstractType
 
                 //On remplace les valeurs des champs correspondants pour que le formulaire soit soumis au contrôleur PHP ReservationController
                 $formModifier($event->getForm(), $day, $seats);
+            }
+        );
+
+        $builder->addEventListener(
+            FormEvents::SUBMIT,
+            function (FormEvent $event) use ($formModifier) {
+                $data = $event->getData();
+                dump($data);
             }
         );
     }

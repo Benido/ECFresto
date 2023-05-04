@@ -17,8 +17,8 @@ export default class extends Controller {
                 },
             complete: function(html) {
                 //On remplace le champs 'time' avec celui de la réponse Ajax
-                $('#reservation_time').replaceWith(
-                    $(html.responseText).find('#reservation_time')
+                $('#reservation_date').replaceWith(
+                    $(html.responseText).find('#reservation_date')
                 )
             }
         })
