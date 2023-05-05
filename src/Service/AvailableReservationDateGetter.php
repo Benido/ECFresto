@@ -20,7 +20,6 @@ class AvailableReservationDateGetter
     {
         //On récupère la capacité du restaurant et on déduit le nombre de couverts entré par l'utilisateur
         $maxCapacity = $this->restaurantRepository->getOne()->getMaxCapacity() - $seatsNumber;
-        //dump($seatsNumber, $maxCapacity);
 
         //On trouve le jour de la semaine
         $weekday = $this->getWeekday($inputDate);
@@ -35,10 +34,10 @@ class AvailableReservationDateGetter
             $lastTimeSlot = $item->getLastTimeSlot();
             //On applique les horaires au jour donné, on modifie la date du jour si l'horaire dépasse minuit, et on les intègre au tableau
             $openingHour?->setDate($inputDate->format('Y'), $inputDate->format('m'),$inputDate->format('d'));
-            if ($openingHour->format('H') <= 4) $openingHour->modify('+1 day');
+            if ($openingHour && $openingHour->format('H') <= 4) $openingHour->modify('+1 day');
             $businessHours[$index][] = $openingHour;
             $lastTimeSlot?->setDate($inputDate->format('Y'), $inputDate->format('m'),$inputDate->format('d'));
-            if ($lastTimeSlot->format('H') <= 4) $lastTimeSlot->modify('+1 day');
+            if ($lastTimeSlot && $lastTimeSlot->format('H') <= 4) $lastTimeSlot->modify('+1 day');
             $businessHours[$index][] = $lastTimeSlot;
             $index++;
         }
@@ -66,7 +65,7 @@ class AvailableReservationDateGetter
                 $timeSlots[] = $timeSlotsSub;
             }
         }
-        dump(array_values($timeSlots));
+        //dump(array_values($timeSlots));
         return $timeSlots;
     }
 

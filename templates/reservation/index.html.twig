@@ -3,28 +3,42 @@
 {% block title %}Hello ReservationController!{% endblock %}
 
 {% block body %}
-<div class="">
-    <h1>Réservation</h1>
-    <div data-controller="time-slot">
-    <h4>>Nouvelle réservation : </h4>
-        {{ form_start(reservation) }}
-            {{ form_label(reservation.seats_number) }}
-            <span data-action="change->time-slot#updateTimeSlots">{{ form_widget(reservation.seats_number) }}</span>
-            {{ form_label(reservation.day) }}
-                <span ><span data-action="change->time-slot#updateTimeSlots" >{{ form_widget(reservation.day) }}</span></span>
-            {{ form_rest(reservation) }}
-        {{ form_end(reservation) }}
-    </div>
-    {#
-    <div>
-        {% for item in day %}
-            <div>
-                {% for i in item %}
-                    {{ i|date('H:i') }} -
+<div class="container">
+    <div class="row">
+        <h1>Réservation</h1>
+        <form id="reservation_form" name="{{ field_name(reservation) }}" method="post"  data-controller="time-slot">
+            <h4>>Nouvelle réservation : </h4>
+            <select id="reservation_seats_number"
+                    name="{{ field_name(reservation.seats_number) }}"
+                    data-action="change->time-slot#updateTimeSlots"
+                    class="form-select">
+                {% for label, value in field_choices(reservation.seats_number) %}
+                    <option value="{{ value }}">{{ label }}</option>
+                {% endfor %}
+            </select>
+            {{ form_row(reservation.day, {'attr': {'data-action': 'change->time-slot#updateTimeSlots', 'class':'form-control'}}) }}
+            <div id="reservation_date" class="">
+                {% for key, item in reservation.date.date.children %}
+                    <input
+                            type="radio"
+                            name="{{ item.vars.full_name }}"
+                            id="{{ item.vars.id }}"
+                            required="required"
+                            class="form-check-input"
+                            value="{{ item.vars.value }}" >
+                    <label class="form-check-label" for="{{ item.vars.id }}">
+                        {{ item.vars.label }}
+                    </label>
                 {% endfor %}
             </div>
-        {% endfor %}
+            {{ form_widget(reservation.email, {'attr': {'class': 'form-control'}})}}
+            {{ form_widget(reservation.allergens, {'attr': {'class': 'form-control'}})}}
+            {{ form_widget(reservation.comment, {'attr': {'class': 'form-control'}})}}
+            {{ form_row(reservation._token)}}
+            {{ form_row(reservation.submit) }}
+            {{ form_row(reservation.reset) }}
+        </form>
+
     </div>
-    #}
 </div>
 {% endblock %}

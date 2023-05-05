@@ -36,7 +36,7 @@ class TimeTagsType extends AbstractType
             ));
 
         $builder->addEventListener(FormEvents::SUBMIT, function(FormEvent $event){
-            //dump($event->getData());
+            dump($event->getData());
         });
     }
     public function configureOptions(OptionsResolver $resolver): void

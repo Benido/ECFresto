@@ -50,8 +50,17 @@ class ReservationType extends AbstractType
                 [
                     'property_path' => 'day',
                     'widget' => 'single_text',
+                    'label' => false,
+                    //'mapped' => false,
+                    //'data' => new \DateTime('')
                 ]
             )
+            ->add('date', TimeTagsType::class,
+                [
+                    'label'=> false,
+                    'day' => $options['day'],
+                    'seats' => $options['seats'],
+                ])
             ->add('email',
                 EmailType::class,
                 [
@@ -77,39 +86,11 @@ class ReservationType extends AbstractType
                         }
                     ))
             )
-            ->add('comment',
-                TextareaType::class,
-                [
-                    'required' => false,
-                ]
-            )
-            ->add(
-                'restaurant',
-                EntityType::class,
-                [
-                    'class' => Restaurant::class,
-                    'choice_label' => 'displayName',
-                    'data' => $options['restaurant'],
-                    'attr' => ['hidden' => ''],
-                    'label' => false
-                ]
-            )
-            ->add('client',
-                EntityType::class,
-                [
-                    'required' => false,
-                    'class' => Client::class,
-                    'choice_label' => 'displayName',
-                    'data' => $options['client']?? null,
-                    'attr' => ['hidden' => ''],
-                    'label' => false
-                ]
-            )
-            ->add(
-                'submit',SubmitType::class
-            )
+            ->add('comment',TextareaType::class, ['required' => false])
+            ->add('submit',SubmitType::class)
             ->add('reset', ResetType::class)
         ;
+
 
         //Modificateur qui ajoute le champ montrant les créneaux horaires disponibles
         $formModifier = function(FormInterface $form, \DateTime $day, int $seats) {
@@ -120,16 +101,6 @@ class ReservationType extends AbstractType
                 'seats' => $seats,
             ]);
         };
-
-        //On ajoute le champ avec les données pré-inscrites
-        $builder->addEventListener(
-            FormEvents::PRE_SET_DATA,
-            function (FormEvent $event) use ($formModifier) {
-                $data = $event->getData();
-                $formModifier($event->getForm(), $data->getDay(), $data->getSeatsNumber());
-            }
-        );
-
         //On récupère les données entrées par l'utilisateur grâce à la requête Ajax
         // lancée par le contrôleur Javascript time-slot-controller
         $builder->addEventListener(
@@ -145,22 +116,35 @@ class ReservationType extends AbstractType
             }
         );
 
+        /*
+         //On ajoute le champ avec les données pré-inscrites
         $builder->addEventListener(
-            FormEvents::SUBMIT,
+            FormEvents::PRE_SET_DATA,
             function (FormEvent $event) use ($formModifier) {
+                $data = $event->getData();
+                dump($data);
+                $formModifier($event->getForm(), $data->getDay(), $data->getSeatsNumber());
+            }
+        );
+
+       */
+        $builder->addEventListener(
+            FormEvents::PRE_SUBMIT,
+            function (FormEvent $event) {
                 $data = $event->getData();
                 dump($data);
             }
         );
+
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => Reservation::class,
-            'restaurant' => null,
             'client' => null,
-            'attr' => ['id' => 'reservation_form'],
+            'day' => null,
+            'seats' => null,
         ]);
     }
 }
