@@ -1,3 +1,12 @@
+insert into admin(email, password, roles)
+values ('admin@admin.fr', '$2y$13$lBuGxki.2X/SBZlQC6ExheviZjOYGgxzhmlNfbSWqqET9NVPSMhpW', 'ROLE_ADMIN ');
+
+insert into client(email, password, roles, default_seats_number, allergens)
+values ('client@client.fr', '$2y$13$qQxvOr1O6yePXbN2bBk9/.UVcte4xcK.cHcZU0LaBHxxDEkBNrdDG', 'ROLE_CLIENT', 4,'a:2:{i:0;s:15:"fruits à coque";i:1;s:12:"pamplemousse";}');
+
+insert into restaurant(max_capacity)
+values (30);
+
 insert into business_hours (weekday, opening_hour, closing_hour)
 values ('lundi', null, null);
 insert into business_hours (weekday, opening_hour, closing_hour)
