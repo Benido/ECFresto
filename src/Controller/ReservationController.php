@@ -20,22 +20,20 @@ class ReservationController extends AbstractController
         //On va chercher l'instance de la classe Restaurant utilisée pour pouvoir la passer au formulaire
         $restaurant = $restaurantRepository->findAll()[0];
 
-        //On créé un nouvel objet réservation et le formulaire qui va l'alimenter
+        //On créé un nouvel objet réservation et on l'hydrate avec les données que l'on connaît déjà
         $reservation = new Reservation();
-        //On l'hydrate avec les données que l'on connaît déjà
         $reservation->setRestaurant($restaurant);
         $client = ($this->getUser() && in_array('ROLE_CLIENT',$this->getUser()->getRoles())) ? $this->getUser() : null;
         if  ($this->getUser() && in_array('ROLE_CLIENT',$this->getUser()->getRoles())){
             $reservation->setClient($this->getUser());
         }
 
+        //On prépare les options à passer au formulaire
         $day = $reservation->getDay();
         $seats = $reservation->getSeatsNumber();
 
         //Le cas échéant, on passe au formulaire les données de l'appel Ajax
-        if ($request->request->has('day')) {
-            $day = new \DateTime($request->request->get('day'));
-        }
+        if ($request->request->has('day'))   $day = new \DateTime($request->request->get('day'));
         if ($request->request->has('seats')) $seats = $request->request->get('seats');
 
         $form = $this->createForm(ReservationType::class, $reservation, [
@@ -43,8 +41,6 @@ class ReservationController extends AbstractController
             'day' => $day,
             'seats' => $seats
         ]);
-
-        if ($request->request->get('date') !== null) {dump($request->request->get('date'));}
 
         $form->handleRequest($request) ;
         if ($form->isSubmitted() && $form->isValid()) {
@@ -58,6 +54,4 @@ class ReservationController extends AbstractController
         ]);
     }
 
-   // public function AvailableTimeSlots(Request $request, RestaurantRepository $restaurantRepository, ReservationRepository $reservationRepository ): Response
-    //{    }
-}
+   }

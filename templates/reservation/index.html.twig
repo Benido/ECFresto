@@ -5,40 +5,78 @@
 {% block body %}
 <div class="container">
     <div class="row">
-        <h1>Réservation</h1>
+        <h1 class="text-center my-3">Réservation</h1>
         <form id="reservation_form" name="{{ field_name(reservation) }}" method="post"  data-controller="time-slot">
-            <h4>>Nouvelle réservation : </h4>
-            <select id="reservation_seats_number"
-                    name="{{ field_name(reservation.seats_number) }}"
-                    data-action="change->time-slot#updateTimeSlots"
-                    class="form-select">
-                {% for label, value in field_choices(reservation.seats_number) %}
-                    <option value="{{ value }}">{{ label }}</option>
-                {% endfor %}
-            </select>
-            {{ form_row(reservation.day, {'attr': {'data-action': 'change->time-slot#updateTimeSlots', 'class':'form-control'}}) }}
-            <div id="reservation_date" class="">
-                {% for key, item in reservation.date.date.children %}
-                    <input
-                            type="radio"
-                            name="{{ item.vars.full_name }}"
-                            id="{{ item.vars.id }}"
-                            required="required"
-                            class="form-check-input"
-                            value="{{ item.vars.value }}" >
-                    <label class="form-check-label" for="{{ item.vars.id }}">
-                        {{ item.vars.label }}
-                    </label>
-                {% endfor %}
+            <div id="reservation_seats_day_selection" class="row my-3">
+                <div class="col">
+                    <select id="reservation_seats_number"
+                            name="{{ field_name(reservation.seats_number) }}"
+                            data-action="change->time-slot#updateTimeSlots"
+                            class="form-select">
+                        {% for label, value in field_choices(reservation.seats_number) %}
+                            <option value="{{ value }}">{{ label }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col">
+                    {{ form_row(reservation.day, {
+                        'attr': {
+                            'data-action': 'change->time-slot#updateTimeSlots',
+                            'class':'form-control',
+                        }}) }}
+                </div>
             </div>
-            {{ form_widget(reservation.email, {'attr': {'class': 'form-control'}})}}
-            {{ form_widget(reservation.allergens, {'attr': {'class': 'form-control'}})}}
-            {{ form_widget(reservation.comment, {'attr': {'class': 'form-control'}})}}
-            {{ form_row(reservation._token)}}
-            {{ form_row(reservation.submit) }}
-            {{ form_row(reservation.reset) }}
+            <div id="reservation_time_slots" class="row my-3">
+                {% if reservation.date.date.children is empty %}
+                    <p class="h5 text-primary text-center">Restaurant fermé</p>
+                {% else %}
+                    {% for key, item in reservation.date.date.children %}
+                        <div class=" col-3 col-md-2 col-lg-1">
+                            <input
+                                    type="radio"
+                                    name="{{ item.vars.full_name }}"
+                                    id="{{ item.vars.id }}"
+                                    required="required"
+                                    class="btn-check"
+                                    data-action="click->time-slot#revealClientInfoPart"
+                                    value="{{ item.vars.value }}" >
+                            <label  for="{{ item.vars.id }}"
+                                    class="btn btn-secondary px-4 py-2 m-1">
+                                {{ item.vars.label }}
+                            </label>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div id="reservation_date_recap" style="display: none">
+                <div class="my-3 px-3 pt-2 pb-1
+                            rounded bg-secondary text-light
+                            d-flex justify-content-between align-items-center">
+                    <span id="reservation_date_recap_text"></span>
+                    <i class="bi bi-calendar-x fs-4"
+                       data-action="click->time-slot#revertHiding">
+                    </i>
+                </div>
+            </div>
+            <div id="reservation_client_info" style="display: none">
+                <div class="my-3">
+                    {{ form_label(reservation.email) }}
+                    {{ form_widget(reservation.email, {'attr': {'class': 'form-control'}})}}
+                </div>
+                <div class="my-3">
+                    {{ form_label(reservation.allergens) }}
+                    {{ form_widget(reservation.allergens, {'attr': {'class': 'form-control'}})}}
+                </div>
+                <div class="my-3">
+                    {{ form_label(reservation.comment) }}
+                    {{ form_widget(reservation.comment, {'attr': {'class': 'form-control'}})}}
+                </div>
+                {{ form_row(reservation._token)}}
+                <div class="d-flex justify-content-center">
+                {{ form_row(reservation.submit, {'attr': {'class': 'btn btn-secondary my-3'}}) }}
+                </div>
+            </div>
         </form>
-
     </div>
 </div>
 {% endblock %}

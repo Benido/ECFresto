@@ -2,16 +2,12 @@
 
 namespace App\Form;
 
-use App\Entity\Client;
 use App\Entity\Reservation;
-use App\Entity\Restaurant;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\ResetType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -20,7 +16,6 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use DateTime;
 
 class ReservationType extends AbstractType
 {
@@ -51,8 +46,7 @@ class ReservationType extends AbstractType
                     'property_path' => 'day',
                     'widget' => 'single_text',
                     'label' => false,
-                    //'mapped' => false,
-                    //'data' => new \DateTime('')
+                    'attr' => ['min' => date('Y-m-d')]
                 ]
             )
             ->add('date', TimeTagsType::class,
@@ -87,8 +81,7 @@ class ReservationType extends AbstractType
                     ))
             )
             ->add('comment',TextareaType::class, ['required' => false])
-            ->add('submit',SubmitType::class)
-            ->add('reset', ResetType::class)
+            ->add('submit',SubmitType::class, ['label' => 'Réserver'])
         ;
 
 
@@ -116,18 +109,6 @@ class ReservationType extends AbstractType
             }
         );
 
-        /*
-         //On ajoute le champ avec les données pré-inscrites
-        $builder->addEventListener(
-            FormEvents::PRE_SET_DATA,
-            function (FormEvent $event) use ($formModifier) {
-                $data = $event->getData();
-                dump($data);
-                $formModifier($event->getForm(), $data->getDay(), $data->getSeatsNumber());
-            }
-        );
-
-       */
         $builder->addEventListener(
             FormEvents::PRE_SUBMIT,
             function (FormEvent $event) {
