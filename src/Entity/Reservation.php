@@ -84,6 +84,20 @@ class Reservation
         return $this;
     }
 
+    public function getLocaleDate(): ?String
+    {
+        $date = $this->date;
+        $dateFormatter = new \IntlDateFormatter(
+            'fr-FR',
+            \IntlDateFormatter::FULL,
+            \IntlDateFormatter::FULL,
+            null,
+            null,
+            'eeee dd MMM'
+        );
+        return $dateFormatter->format($date);
+    }
+
     public function getSeatsNumber(): ?int
     {
         return $this->seats_number;

@@ -3,19 +3,85 @@
 {% block title %}Préférences client{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; background: coral; padding: 2px 6px; }
-</style>
+    <div class="container">
+        <div class="row">
+            <form name="{{ field_name(preferences) }}" method="post"  data-controller="client-preferences">
+                <h1 class="text-center my-3 h3">Préférences</h1>
+                <div class="my-4">
+                    <h2 class="h4">Mes identifiants</h2>
+                    <div class="my-3">
+                        {{ form_label(preferences.email, 'Email', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(preferences.email, {'attr': {'class': 'form-control'}})}}
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            {{ form_label(preferences.newPassword, 'Nouveau mot de passe',{
+                                'label_attr' : {'class': 'form-label'}
+                            }) }}
+                            {{ form_widget(preferences.newPassword, {
+                                'attr': {
+                                    'data-action': 'keyup->client-preferences#passwordValidation',
+                                    'class': 'form-control'
+                                }})}}
+                            <div id="password_errors" class="form-text"></div>
+                        </div>
+                        <div class="col">
+                            {{ form_label(preferences.newPasswordConfirmation, 'Confirmer le mot de passe', {
+                                'label_attr' : {'class': 'form-label'}
+                            }) }}
+                            {{ form_widget(preferences.newPasswordConfirmation, {
+                                'attr': {
+                                    'data-action' : 'keyup->client-preferences#passwordCheck',
+                                    'class': 'form-control',
+                            }}) }}
+                            <div id="password_confirmation_errors" class="form-text text-danger"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="my-4">
+                    <h2 class="h4">Mes préférences</h2>
+                    <div class="my-3">
+                        <label for="preferences_default_seats_number">Nombre de convives par défaut</label>
+                        <select id="preferences_default_seats_number"
+                                name="{{ field_name(preferences.defaultSeatsNumber) }}"
+                                class="form-select">
+                            {% for choice in preferences.defaultSeatsNumber.vars.choices %}
+                                <option
+                                        value="{{ choice.value }}"
+                                        {{ choice.value == preferences.defaultSeatsNumber.vars.data ? 'selected' : '' }}
+                                >{{ choice.label }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="my-3">
+                        {{ form_label(preferences.allergens, 'Allergies', {
+                            'label_attr' : {'class': 'form-label'}
+                        }) }}
+                        {{ form_widget(preferences.allergens, {'attr': {'class': 'form-control'}})}}
+                        {{ form_help(preferences.allergens, {
+                            'help' : 'Lister ici vos différentes allergies\, séparées par une virgule. 500 caractères maximum',
+                            'help_attr': {'class': 'form-text'}
+                        })  }}
+                    </div>
 
-<div class="example-wrapper">
-    <h1>Préférences Client</h1>
-    <h3>votre email: {{  app.user.email }}</h3>
-    <h3>votre role: {{ app.user.roles | join}}</h3>
-    <h3>Allergènes</h3>
-    <ul>
-    {% for allergen in app.user.allergens %}
-        <li>{{ allergen }}</li>
-    {% endfor %}
-    </ul>
-</div>
+                    {{ form_row(preferences._token)}}
+                    <div class="d-flex justify-content-center">
+                        {{ form_row(preferences.submit, {
+                            'label': 'Enregister',
+                            'attr': {'class': 'btn btn-secondary my-3'}}) }}
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="my-4">
+            <h2 class="h4">Mes réservations</h2>
+            <div>
+                <ul class="list-group list-group-flush">
+                    {% for item in reservations %}
+                    <li class="list-group-item">Pour {{ item.getSeatsNumber }} convives le {{ item.getLocaleDate }} à {{ item.getTime|date('H:i') }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
 {% endblock %}

@@ -13,8 +13,11 @@
                             name="{{ field_name(reservation.seats_number) }}"
                             data-action="change->time-slot#updateTimeSlots"
                             class="form-select">
-                        {% for label, value in field_choices(reservation.seats_number) %}
-                            <option value="{{ value }}">{{ label }}</option>
+                        {% for choice in reservation.seats_number.vars.choices %}
+                            <option
+                                    value="{{ choice.value }}"
+                                    {{ choice.value == reservation.seats_number.vars.data ? 'selected' : ''}}
+                            >{{ choice.label }}</option>
                         {% endfor %}
                     </select>
                 </div>
