@@ -34,10 +34,6 @@ class TimeTagsType extends AbstractType
                     return ($arrayToDateTime['date']);
                 },
             ));
-
-        $builder->addEventListener(FormEvents::SUBMIT, function(FormEvent $event){
-            dump($event->getData());
-        });
     }
     public function configureOptions(OptionsResolver $resolver): void
     {

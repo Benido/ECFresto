@@ -65,7 +65,6 @@ class AvailableReservationDateGetter
                 $timeSlots[] = $timeSlotsSub;
             }
         }
-        //dump(array_values($timeSlots));
         return $timeSlots;
     }
 

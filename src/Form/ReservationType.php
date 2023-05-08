@@ -108,15 +108,6 @@ class ReservationType extends AbstractType
                 $formModifier($event->getForm(), $day, $seats);
             }
         );
-
-        $builder->addEventListener(
-            FormEvents::PRE_SUBMIT,
-            function (FormEvent $event) {
-                $data = $event->getData();
-                dump($data);
-            }
-        );
-
     }
 
     public function configureOptions(OptionsResolver $resolver): void
