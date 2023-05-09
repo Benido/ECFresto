@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Form\ClientPreferencesType;
 use App\Repository\ClientRepository;
+use App\Repository\ReservationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -40,5 +41,19 @@ class ClientPreferencesController extends AbstractController
             'preferences' => $form,
             'reservations' => $client?->getReservations()
         ]);
+    }
+
+    #[Route('/client-preferences/cancel-reservation', name: 'app_client_cancel_reservation', methods: 'POST')]
+    public function cancelReservation(Request $request, ReservationRepository $reservationRepository): Response
+    {
+        try {
+            $reservation = $reservationRepository->find($request->request->get('reservationId'));
+            $reservationRepository->remove($reservation, true);
+            return new Response(null , 204);
+        } catch (Exception $e) {
+            return new Response(null, 424);
+        }
+
+
     }
 }

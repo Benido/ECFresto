@@ -68,7 +68,6 @@ class Reservation
     public function setDay(DateTime $date): self
     {
         $this->date->setDate($date->format('Y'), $date->format('m'), $date->format('d')) ;
-        dump($this->date);
         return $this;
     }
 

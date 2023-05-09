@@ -23,7 +23,7 @@
                                     'data-action': 'keyup->client-preferences#passwordValidation',
                                     'class': 'form-control'
                                 }})}}
-                            <div id="password_errors" class="form-text"></div>
+                            <div id="password_errors" class="form-text ms-2"></div>
                         </div>
                         <div class="col">
                             {{ form_label(preferences.newPasswordConfirmation, 'Confirmer le mot de passe', {
@@ -34,7 +34,7 @@
                                     'data-action' : 'keyup->client-preferences#passwordCheck',
                                     'class': 'form-control',
                             }}) }}
-                            <div id="password_confirmation_errors" class="form-text text-danger"></div>
+                            <div id="password_confirmation_errors" class="form-text ms-2"></div>
                         </div>
                     </div>
                 </div>
@@ -60,10 +60,9 @@
                         {{ form_widget(preferences.allergens, {'attr': {'class': 'form-control'}})}}
                         {{ form_help(preferences.allergens, {
                             'help' : 'Lister ici vos différentes allergies\, séparées par une virgule. 500 caractères maximum',
-                            'help_attr': {'class': 'form-text'}
+                            'help_attr': {'class': 'form-text ms-2'}
                         })  }}
                     </div>
-
                     {{ form_row(preferences._token)}}
                     <div class="d-flex justify-content-center">
                         {{ form_row(preferences.submit, {
@@ -76,9 +75,30 @@
         <div class="my-4">
             <h2 class="h4">Mes réservations</h2>
             <div>
-                <ul class="list-group list-group-flush">
+                <ul class="list-group list-group-flush" data-controller="reservation-cancel">
                     {% for item in reservations %}
-                    <li class="list-group-item">Pour {{ item.getSeatsNumber }} convives le {{ item.getLocaleDate }} à {{ item.getTime|date('H:i') }}</li>
+                    <li id="reservation_{{ item.getId }}" class="list-group-item">
+                        <p class="mb-0">Pour {{ item.getSeatsNumber }} convives le {{ item.getLocaleDate }} à {{ item.getTime|date('H:i') }}
+                            <a role=button data-bs-toggle="collapse" href="#confirmation_cancel_{{ loop.index }}" aria-expanded="false" aria-controls="confirmation_cancel_{{ loop.index }}">
+                                <i class="bi bi-x-lg float-end"></i>
+                            </a>
+                        </p>
+                        <div id="confirmation_cancel_{{ loop.index }}" class="collapse">
+                            <div class="card card-body text-end d-inline-flex float-end">
+                                <div class="card-title">Êtes-vous sûr.e de vouloir annuler cette réservation ?</div>
+                                <div class="d-flex justify-content-end">
+                                    <button type="button" class="btn btn-secondary mx-2 px-3"
+                                            data-action="click->reservation-cancel#cancelReservation"
+                                            data-reservation-id="{{ item.getId }}"
+                                            >Oui</button>
+                                    <button type="button" class="btn btn-danger px-3"
+                                            data-bs-toggle="collapse" data-bs-target="#confirmation_cancel_{{ loop.index }}"
+                                            aria-expanded="false" aria-controls="confirmation_cancel_{{ loop.index }}">Non</button>
+                                </div>
+                                <div class="cancellation-error text-start text-danger fs-6 mt-2"></div>
+                            </div>
+                        </div>
+                    </li>
                     {% endfor %}
                 </ul>
             </div>
