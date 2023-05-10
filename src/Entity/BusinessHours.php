@@ -53,7 +53,9 @@ class BusinessHours
 
     public function getOpeningHour(): ?\DateTimeInterface
     {
-        return $this->openingHour;
+        if ($this->openingHour !== null)
+        return clone $this->openingHour;
+        else return null;
     }
 
     public function setOpeningHour(?\DateTimeInterface $openingHour): self
@@ -65,7 +67,9 @@ class BusinessHours
 
     public function getClosingHour(): ?\DateTimeInterface
     {
-        return $this->closingHour;
+        if ($this->closingHour !== null)
+        return clone $this->closingHour;
+        else return null;
     }
 
     public function setClosingHour(?\DateTimeInterface $closingHour): self
