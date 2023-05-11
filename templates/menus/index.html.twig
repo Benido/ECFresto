@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Menus{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="d-flex flex-column justify-content-center align-items-center">
+            <div><a href="{{ path('app_menus_la_carte') }}">La Carte</a></div>
+            <div><a href="{{ path('app_menus_la_carte') }}">Les Menus</a></div>
+        </div>
+    </div>
+{% endblock %}

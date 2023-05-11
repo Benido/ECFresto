@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Allergen;
 use App\Entity\Client;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -70,21 +72,14 @@ class ClientPreferencesType extends AbstractType
                     ]
                 ]
             )
-            ->add(
-                $builder
-                    ->create('allergens',
-                        TextType::class,
-                        [
-                            'required' => false,
-                        ])
-                    ->addModelTransformer(new CallbackTransformer(
-                        function ($allergensAsArray): string {
-                            return $allergensAsArray ? implode(', ', $allergensAsArray) : "";
-                        }    ,
-                        function ($allergensAsString): array {
-                            return $allergensAsString ? explode(', ', $allergensAsString) : [];
-                        }
-                    ))
+            ->add('allergens',
+                EntityType::class,
+                [
+                    'class' => Allergen::class,
+                    'choice_label' => 'title',
+                    'multiple' => true,
+                    'expanded' => true
+                ]
             )
             ->add('submit', SubmitType::class)
         ;

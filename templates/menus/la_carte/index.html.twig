@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}La carte{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="">
+            <h1>La Carte</h1>
+            {% for category in categories %}
+                <h2>{{ category.getTitle }}</h2>
+                {% for dish in dishes %}
+                    {% if dish.getCategory.getTitle == category.getTitle %}
+                        <div class="d-flex px-2 m-1 bg-light">
+                            <div>
+                            <h3 class="h4 mb-3">{{ dish.getTitle }}</h3>
+                                <p><em>{{ dish.getDescription }}</em></p>
+                                <p class="text-secondary"><small>
+                                    {% for allergen in dish.getAllergens %}
+                                        {{ allergen.getTitle }}
+                                    {% endfor %}
+                                </small></p>
+                            </div>
+                            <div class="w-100 text-secondary fs-4 text-end pe-3">
+                                <strong>{{ dish.getPrice }}€</strong>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

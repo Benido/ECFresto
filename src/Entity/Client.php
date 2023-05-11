@@ -22,16 +22,17 @@ class Client extends User
     #[ORM\Column(type: Types::SMALLINT, nullable: true)]
     private ?int $defaultSeatsNumber = null;
 
-    #[ORM\Column(type: Types::ARRAY)]
-    private array $allergens = [];
-
     #[ORM\OneToMany(mappedBy: 'client', targetEntity: Reservation::class)]
     private Collection $reservations;
+
+    #[ORM\ManyToMany(targetEntity: Allergen::class, inversedBy: 'clients')]
+    private Collection $allergens;
 
 
     public function __construct()
     {
         $this->reservations = new ArrayCollection();
+        $this->allergens = new ArrayCollection();
     }
 
     public function getId(): ?Uuid
@@ -47,18 +48,6 @@ class Client extends User
     public function setDefaultSeatsNumber(?int $defaultSeatsNumber): self
     {
         $this->defaultSeatsNumber = $defaultSeatsNumber;
-
-        return $this;
-    }
-
-    public function getAllergens(): array
-    {
-        return $this->allergens;
-    }
-
-    public function setAllergens(array $allergens): self
-    {
-        $this->allergens = $allergens;
 
         return $this;
     }
@@ -96,5 +85,26 @@ class Client extends User
     public function displayName(): string
     {
         return $this->getEmail();
+    }
+
+    public function getAllergens(): ArrayCollection|Collection
+    {
+        return $this->allergens;
+    }
+
+    public function addAllergen(Allergen $allergen): self
+    {
+        if (!$this->allergens->contains($allergen)) {
+            $this->allergens->add($allergen);
+        }
+
+        return $this;
+    }
+
+    public function removeAllergen(Allergen $allergen): self
+    {
+        $this->allergens->removeElement($allergen);
+
+        return $this;
     }
 }

@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\ReservationRepository;
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -24,9 +26,6 @@ class Reservation
     #[ORM\Column(type: Types::SMALLINT)]
     private ?int $seats_number = 1;
 
-    #[ORM\Column(type: Types::ARRAY)]
-    private array $allergens = [];
-
     #[ORM\Column(length: 500, nullable: true)]
     private ?string $comment = null;
 
@@ -37,9 +36,13 @@ class Reservation
     #[ORM\ManyToOne(inversedBy: 'reservations')]
     private ?Client $client = null;
 
+    #[ORM\ManyToMany(targetEntity: Allergen::class, inversedBy: 'reservations')]
+    private Collection $allergens;
+
     public function __construct()
     {
         $this->date = new DateTime();
+        $this->allergens = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -109,18 +112,6 @@ class Reservation
         return $this;
     }
 
-    public function getAllergens(): array
-    {
-        return $this->allergens;
-    }
-
-    public function setAllergens(array $allergens): self
-    {
-        $this->allergens = $allergens;
-
-        return $this;
-    }
-
     public function getComment(): ?string
     {
         return $this->comment;
@@ -165,6 +156,27 @@ class Reservation
     public function setEmail(string $email): self
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    public function getAllergens(): ArrayCollection|Collection
+    {
+        return $this->allergens;
+    }
+
+    public function addAllergen(Allergen $allergen): self
+    {
+        if (!$this->allergens->contains($allergen)) {
+            $this->allergens->add($allergen);
+        }
+
+        return $this;
+    }
+
+    public function removeAllergen(Allergen $allergen): self
+    {
+        $this->allergens->removeElement($allergen);
 
         return $this;
     }

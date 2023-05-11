@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Allergen;
 use App\Entity\Reservation;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -59,26 +61,19 @@ class ReservationType extends AbstractType
                 EmailType::class,
                 [
                     //S'il est connecté, on récupère l'email du client
-                    'data' => $options['client']?->getEmail() ,
+                    'data' => $options['client']?->getEmail(),
                 ]
             )
-            ->add(
-                $builder
-                    ->create('allergens',
-                        TextType::class,
-                        [
-                            'required' => false,
-                            //S'il est connecté, on récupère les allergènes sauvegardés par le client
-                            'data' => $options['client']?->getAllergens(),
-                        ])
-                    ->addModelTransformer(new CallbackTransformer(
-                        function ($allergensAsArray): string {
-                            return $allergensAsArray ? implode(', ', $allergensAsArray) : "";
-                        }    ,
-                        function ($allergensAsString): array {
-                            return $allergensAsString ? explode(', ', $allergensAsString) : [];
-                        }
-                    ))
+            ->add('allergens',
+                    EntityType::class,
+                [
+                    //S'il est connecté, on récupère les allergènes enregistrés par le client
+                    'data' => $options['client']?->getAllergens(),
+                    'class' => Allergen::class,
+                    'choice_label' => 'title',
+                    'multiple' => true,
+                    'expanded' => true
+                ]
             )
             ->add('comment',TextareaType::class, ['required' => false])
             ->add('submit',SubmitType::class, ['label' => 'Réserver'])
@@ -94,6 +89,7 @@ class ReservationType extends AbstractType
                 'seats' => $seats,
             ]);
         };
+
         //On récupère les données entrées par l'utilisateur grâce à la requête Ajax
         // lancée par le contrôleur Javascript time-slot-controller
         $builder->addEventListener(

@@ -1,0 +1,12 @@
+<li class="list-group-item"
+    data-controller="{{ entity }}-edition"
+    data-{{ entity }}-edition-id-value="{{ id }}">
+    <div class="row">
+        <div class="col">{{ content }}</div>
+        <div class="col d-flex justify-content-end align-items-center"
+             data-action="click->{{ entity }}-edition#getForm"   >
+            <button type="button" class="btn btn-secondary btn-sm text-light">Éditer</button>
+        </div>
+    </div>
+    <div id="edit_{{ entity }}_form_wrapper_{{ id }}"></div>
+</li>

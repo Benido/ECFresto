@@ -13,9 +13,9 @@
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </head>
-    <body style="width: 100vw; height: 100vh; margin: 0; padding: 0">
-        {% include 'fragments/header.html.twig' %}
+    <body style="width: 100vw; margin: 0; padding: 0" class="d-flex flex-column min-vh-100">
+        {% include 'fragments/layout/_header.html.twig' %}
         {% block body %}{% endblock %}
-        {% include 'fragments/footer.html.twig' %}
+        {% include 'fragments/layout/_footer.html.twig' %}
     </body>
 </html>
