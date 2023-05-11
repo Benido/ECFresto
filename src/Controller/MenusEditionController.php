@@ -4,10 +4,12 @@ namespace App\Controller;
 
 use App\Entity\Dish;
 use App\Entity\Menu;
+use App\Form\AllergenType;
 use App\Form\DishCategoryType;
 use App\Form\DishType;
 use App\Form\FormulaType;
 use App\Form\MenuType;
+use App\Repository\AllergenRepository;
 use App\Repository\DishCategoryRepository;
 use App\Repository\DishRepository;
 use App\Repository\FormulaRepository;
@@ -123,6 +125,28 @@ class MenusEditionController extends AbstractController
         return $this->render('/fragments/form/_formula_form.html.twig',
             [
                 'editFormulaForm' => $editFormulaForm,
+            ]
+        );
+    }
+    
+    #[Route('/administration/publier-menus/editer-allergene-{id}', name: 'app_administration_editer-allergene', methods: 'POST')]
+    public function editAllergen(Request $request, AllergenRepository $allergenRepository, int $id): Response
+    {
+        $allergen = $allergenRepository->find($id);
+        $editAllergenForm = $this->createForm(AllergenType::class, $allergen, [
+            'action' => $this->generateUrl('app_administration_editer-allergene', ['id' => $id])
+        ]);
+        $editAllergenForm->handleRequest($request);
+
+        if ($editAllergenForm->isSubmitted() && $editAllergenForm->isValid()) {
+            $allergen = $editAllergenForm->getData();
+            $allergenRepository->save($allergen, true);
+            return $this->redirectToRoute('app_administration_publier_menus');
+        }
+
+        return $this->render('/fragments/form/_allergen_form.html.twig',
+            [
+                'editAllergenForm' => $editAllergenForm,
             ]
         );
     }

@@ -7,7 +7,7 @@
     {{ include('fragments/layout/_admin_sidebar.html.twig')}}
     <div class="container">
         <section class="p-2 m-3 bg-light">
-            <div data-controller="dish-edition category-edition">
+            <div data-controller="dish-edition category-edition allergen-edition">
                 <div class="d-flex">
                     <h2 class="">Plats</h2>
                     <div class="col-auto d-flex justify-content-end align-items-center mx-3"
@@ -16,15 +16,22 @@
                             <i class="bi bi-plus-lg"></i> Ajouter un plat
                         </button>
                     </div>
-                    <div class="col-auto d-flex justify-content-end align-items-center"
+                    <div class="col-auto d-flex justify-content-end align-items-center mx-3"
                          data-action="click->category-edition#getForm">
                         <button type="button" class="btn btn-secondary btn-sm text-light">
                             <i class="bi bi-plus-lg"></i> Ajouter une catégorie
                         </button>
                     </div>
+                    <div class="col-auto d-flex justify-content-end align-items-center"
+                         data-action="click->allergen-edition#getForm">
+                        <button type="button" class="btn btn-secondary btn-sm text-light">
+                            <i class="bi bi-plus-lg"></i> Ajouter un allergène
+                        </button>
+                    </div>
                 </div>
                 <div id="edit_dish_form_wrapper_0"></div>
                 <div id="edit_category_form_wrapper_0"></div>
+                <div id="edit_allergen_form_wrapper_0"></div>
             </div>
             <div class="">
                 {# On liste les catégories #}

@@ -31,6 +31,7 @@ class DishType extends AbstractType
                     'class' => Menu::class,
                     'choice_label' => 'title',
                     'multiple' => true,
+                    'required' => false,
                 ]
             )
             ->add('allergens', EntityType::class,
