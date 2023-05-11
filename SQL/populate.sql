@@ -1,8 +1,8 @@
-insert into admin(email, password, roles)
-values ('admin@admin.fr', '$2y$13$lBuGxki.2X/SBZlQC6ExheviZjOYGgxzhmlNfbSWqqET9NVPSMhpW', 'ROLE_ADMIN ');
+insert into admin(id, email, password, roles)
+values (0x1edeea5d332c6bb4a0283bc3c1338ace, 'admin@admin.fr', '$2y$13$lBuGxki.2X/SBZlQC6ExheviZjOYGgxzhmlNfbSWqqET9NVPSMhpW', 'ROLE_ADMIN ');
 
-insert into client(email, password, roles, default_seats_number, allergens)
-values ('client@client.fr', '$2y$13$qQxvOr1O6yePXbN2bBk9/.UVcte4xcK.cHcZU0LaBHxxDEkBNrdDG', 'ROLE_CLIENT', 4,'a:2:{i:0;s:15:"fruits à coque";i:1;s:12:"pamplemousse";}');
+insert into client(id, email, password, roles, default_seats_number)
+values (0x1edeea5d373b66a6b83c3bc3c1338ace, 'client@client.fr', '$2y$13$qQxvOr1O6yePXbN2bBk9/.UVcte4xcK.cHcZU0LaBHxxDEkBNrdDG', 'ROLE_CLIENT', 4);
 
 insert into restaurant(max_capacity)
 values (30);
