@@ -1,1 +1,29 @@
-{{ form(editCategoryForm) }}
+<form
+        name="{{ editCategoryForm.vars.full_name }}"
+        action="{{ editCategoryForm.vars.action }}"
+        method="{{ editCategoryForm.vars.method }}">
+    <div class="card m-3">
+        <div class="card-header d-flex justify-content-between">
+            <h4 class="card-title">{{ editCategoryForm.title.vars.data != "" ? 'Editer la ' : 'Ajouter une '}}catégorie</h4>
+            <button type="button"
+                    class="btn-close"
+                    data-controller="close-form"
+                    data-action="click->close-form#closeForm"
+                    aria-label="Close"></button>
+        </div>
+        <div class="card-body">
+            {{ form_label(editCategoryForm.title, 'Titre', { 'attr': {'class': 'form-label'}}) }}
+            <div class="row">
+                <div class="col d-flex">
+                    {{ form_widget(editCategoryForm.title, {
+                        'attr': {'class': 'form-control'},
+                    }) }}
+                </div>
+                <div class="col-auto d-flex justify-content-center">
+                    {{ form_row(editCategoryForm.submit, {'attr': {'class': 'btn btn-secondary'}}) }}
+                </div>
+            </div>
+            {{ form_row(editCategoryForm._token)}}
+        </div>
+    </div>
+</form>

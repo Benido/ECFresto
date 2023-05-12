@@ -1,1 +1,35 @@
-{{ form(editAllergenForm) }}
+<form
+    name="{{ editAllergenForm.vars.full_name }}"
+    action="{{ editAllergenForm.vars.action }}"
+    method="{{ editAllergenForm.vars.method }}">
+    <div class="card m-3">
+        <div class="card-header d-flex justify-content-between">
+            <h4 class="card-title">{{ editAllergenForm.title.vars.data != "" ? 'Éditer l\' ' : 'Ajouter un '}}allergène</h4>
+            <button type="button"
+                    class="btn-close"
+                    data-controller="close-form"
+                    data-action="click->close-form#closeForm"
+                    aria-label="Close"></button>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col">
+                    {{ form_row(editAllergenForm.title, {
+                        'attr': {'class': 'form-control'},
+                        'label': 'Titre'
+                    }) }}
+                </div>
+                <div class="col">
+                    {{ form_row(editAllergenForm.dishes, {
+                        'attr': {'class': 'form-control'},
+                        'label': 'Ajouter à un plat'
+                    }) }}
+                </div>
+                <div class="col-12 col-lg-auto d-flex justify-content-center align-items-center">
+                    {{ form_row(editAllergenForm.submit, {'attr': {'class': 'btn btn-secondary my-3'}}) }}
+                </div>
+            </div>
+            {{ form_row(editAllergenForm._token)}}
+        </div>
+    </div>
+</form>

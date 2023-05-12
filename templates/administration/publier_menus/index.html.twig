@@ -10,19 +10,19 @@
             <div data-controller="dish-edition category-edition allergen-edition">
                 <div class="d-flex">
                     <h2 class="">Plats</h2>
-                    <div class="col-auto d-flex justify-content-end align-items-center mx-3"
+                    <div class="col-auto d-flex justify-content-end align-items-center ms-3 me-2"
                          data-action="click->dish-edition#getForm">
                         <button type="button" class="btn btn-secondary btn-sm text-light">
                             <i class="bi bi-plus-lg"></i> Ajouter un plat
                         </button>
                     </div>
-                    <div class="col-auto d-flex justify-content-end align-items-center mx-3"
+                    <div class="col-auto d-flex justify-content-end align-items-center mx-2"
                          data-action="click->category-edition#getForm">
                         <button type="button" class="btn btn-secondary btn-sm text-light">
                             <i class="bi bi-plus-lg"></i> Ajouter une catégorie
                         </button>
                     </div>
-                    <div class="col-auto d-flex justify-content-end align-items-center"
+                    <div class="col-auto d-flex justify-content-end align-items-center mx-2"
                          data-action="click->allergen-edition#getForm">
                         <button type="button" class="btn btn-secondary btn-sm text-light">
                             <i class="bi bi-plus-lg"></i> Ajouter un allergène
@@ -140,13 +140,13 @@
                                             <i class="bi bi-plus-lg"></i> Ajouter une formule</button>
                                     </div>
                                     <div id="edit_form_wrapper_{{ menuId }}_formula_0"></div>
-                                    <div id="edit_menu_form_wrapper_{{ menuId }}"></div>
                                 </div>
                                 <div class="col d-flex justify-content-end align-items-center"
                                      data-action="click->menu-edition#getForm"   >
                                     <button type="button" class="btn btn-secondary btn-sm text-light">Éditer</button>
                                 </div>
                             </div>
+                            <div id="edit_menu_form_wrapper_{{ menuId }}"></div>
                         </li>
                     {% endfor %}
                 </ul>

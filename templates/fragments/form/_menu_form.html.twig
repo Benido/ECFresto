@@ -1,1 +1,35 @@
-{{ form(editMenuForm) }}
+<form
+        name="{{ editMenuForm.vars.full_name }}"
+        action="{{ editMenuForm.vars.action }}"
+        method="{{ editMenuForm.vars.method }}">
+    <div class="card m-3">
+        <div class="card-header d-flex justify-content-between">
+            <h4 class="card-title">{{ editMenuForm.title.vars.data != "" ? 'Editer le ' : 'Ajouter un '}}menu</h4>
+            <button type="button"
+                    class="btn-close"
+                    data-controller="close-form"
+                    data-action="click->close-form#closeForm"
+                    aria-label="Close"></button>
+        </div>
+        <div class="card-body">
+            <div class="d-flex flex-column">
+                <div class="py-2">
+                    {{ form_row(editMenuForm.title, {
+                        'attr': {'class': 'form-control'},
+                        'label': 'Titre'
+                    }) }}
+                </div>
+                <div class="py-2">
+                    {{ form_row(editMenuForm.dishes, {
+                        'attr': {'class': 'form-control'},
+                        'label': 'Plats'
+                    }) }}
+                </div>                
+            </div>
+            <div class=" d-flex justify-content-center">
+                {{ form_row(editMenuForm.submit, {'attr': {'class': 'btn btn-secondary my-3'}}) }}
+            </div>
+            {{ form_row(editMenuForm._token)}}
+        </div>
+    </div>
+</form>

@@ -1,1 +1,64 @@
-{{ form(editDishForm) }}
+<form
+        name="{{ editDishForm.vars.full_name }}"
+        action="{{ editDishForm.vars.action }}"
+        method="{{ editDishForm.vars.method }}">
+    <div class="card m-3">
+        <div class="card-header d-flex justify-content-between">
+            <h4 class="card-title">{{ editDishForm.title.vars.data != "" ? 'Editer le ' : 'Ajouter un '}}plat</h4>
+            <button type="button"
+                    class="btn-close"
+                    data-controller="close-form"
+                    data-action="click->close-form#closeForm"
+                    aria-label="Close"></button>
+        </div>
+        <div class="card-body">
+            <div class="row row-cols-1 row-cols-lg-3">
+                <div class="col py-2">
+                    {{ form_row(editDishForm.title, {
+                        'attr': {'class': 'form-control'},
+                        'label': 'Titre'
+                    }) }}
+                </div>
+                <div class="col py-2">
+                    {{ form_row(editDishForm.description, {
+                        'attr': {'class': 'form-control'},
+                    }) }}
+                </div>
+                <div class="col py-2">
+                    {{ form_row(editDishForm.price, {
+                        'attr': {
+                            'class': 'form-control',
+                            'max-length': 8,
+                        },
+                        'label': 'Prix',
+                    }) }}
+                </div>
+            </div>
+            <div class="row row-cols-1 row-cols-lg-3">
+                <div class="col py-2">
+                    {{ form_row(editDishForm.category, {
+                        'attr': {'class': 'form-select'},
+                        'label': 'Catégorie',
+                    }) }}
+                </div>
+                <div class="col py-2">
+                    {{ form_row(editDishForm.menus, {
+                        'attr': {'class': 'form-select', 'size': 3,},
+                        'help_attr': {'class': 'form-text'}
+                    }) }}
+                </div>
+                <div class="col py-2">
+                    {{ form_row(editDishForm.allergens, {
+                        'attr': {'class': 'form-select', 'size': 3,},
+                        'help_attr': {'class': 'form-text'},
+                        'label': 'Allergènes'
+                    }) }}
+                </div>
+            </div>
+            <div class=" d-flex justify-content-center">
+                {{ form_row(editDishForm.submit, {'attr': {'class': 'btn btn-secondary my-3'}}) }}
+            </div>
+            {{ form_row(editDishForm._token)}}
+        </div>
+    </div>
+</form>

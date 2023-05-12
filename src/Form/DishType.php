@@ -32,6 +32,7 @@ class DishType extends AbstractType
                     'choice_label' => 'title',
                     'multiple' => true,
                     'required' => false,
+                    'help' => 'Vous pouvez sélectionner plusieurs menus'
                 ]
             )
             ->add('allergens', EntityType::class,
@@ -39,7 +40,8 @@ class DishType extends AbstractType
                     'class' => Allergen::class,
                     'choice_label' => 'title',
                     'multiple' => true,
-                    'expanded' => true,
+                    'help' => 'Vous pouvez sélectionner plusieurs allergènes'
+
                 ]
             )
             ->add('submit',SubmitType::class, ['label' => 'Enregistrer'])
