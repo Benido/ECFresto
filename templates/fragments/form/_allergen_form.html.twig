@@ -4,7 +4,7 @@
     method="{{ editAllergenForm.vars.method }}">
     <div class="card m-3">
         <div class="card-header d-flex justify-content-between">
-            <h4 class="card-title">{{ editAllergenForm.title.vars.data != "" ? 'Éditer l\' ' : 'Ajouter un '}}allergène</h4>
+            <h4 class="card-title">{{ editAllergenForm.title.vars.data == "" ? 'Ajouter un allergène' : 'Éditer '}}{{ editAllergenForm.title.vars.data }}</h4>
             <button type="button"
                     class="btn-close"
                     data-controller="close-form"
@@ -22,11 +22,19 @@
                 <div class="col">
                     {{ form_row(editAllergenForm.dishes, {
                         'attr': {'class': 'form-control'},
-                        'label': 'Ajouter à un plat'
+                        'label': 'Ajouter à un plat',
                     }) }}
                 </div>
-                <div class="col-12 col-lg-auto d-flex justify-content-center align-items-center">
-                    {{ form_row(editAllergenForm.submit, {'attr': {'class': 'btn btn-secondary my-3'}}) }}
+                <div class="col-12 col-lg-auto d-flex flex-column justify-content-center align-items-center">
+                    {{ form_widget(editAllergenForm.submit, {'attr': {'class': 'btn btn-secondary my-3'}}) }}
+                    {% if editAllergenForm.vars.data.id is defined %}
+                    <button type="button"
+                            class="btn btn-danger ms-2 my-3"
+                            data-controller="allergen-edition"
+                            data-allergen-edition-id-value="{{ editAllergenForm.vars.data.id }}"
+                            data-action="click->allergen-edition#removeAllergen"
+                    >Supprimer</button>
+                    {% endif %}
                 </div>
             </div>
             {{ form_row(editAllergenForm._token)}}

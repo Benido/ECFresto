@@ -14,4 +14,21 @@ export default class extends Controller {
             }
         })
     }
+
+    removeMenu() {
+        $.ajax({
+            url: '/administration/publier-menus/supprimer-menu/' + this.idValue,
+            type: 'POST',
+            success: function () {
+                $.ajax({
+                    url: '/administration/publier-menus',
+                    type: 'POST',
+                    //On remplace le contenu de la section "Menus"
+                    complete: function(data){
+                        $('#menus').replaceWith($(data.responseText).find('#menus'))
+                    }
+                })
+            }
+        })
+    }
 }

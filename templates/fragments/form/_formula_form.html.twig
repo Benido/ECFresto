@@ -4,7 +4,7 @@
         method="{{ editFormulaForm.vars.method }}">
     <div class="card m-3">
         <div class="card-header d-flex justify-content-between">
-            <h4 class="card-title">{{ editFormulaForm.title.vars.data != "" ? 'Editer la ' : 'Ajouter une '}}formule</h4>
+            <h4 class="card-title">{{ editFormulaForm.title.vars.data == "" ? 'Ajouter une formule' : 'Éditer '}}{{ editFormulaForm.title.vars.data }}</h4>
             <button type="button"
                     class="btn-close"
                     data-controller="close-form"
@@ -40,8 +40,17 @@
                     }) }}
                 </div>
             </div>
-            <div class=" d-flex justify-content-center">
-                {{ form_row(editFormulaForm.submit, {'attr': {'class': 'btn btn-secondary my-3'}}) }}
+            <div class=" d-flex justify-content-center"
+                 data-controller="formula-edition"
+                 data-formula-edition-id-value="{{ editFormulaForm.vars.data.id ?? 0 }}"
+                 data-formula-edition-menuid-value="{{ menuId }}" >
+                {{ form_widget(editFormulaForm.submit, {'attr': {'class': 'btn btn-secondary my-3'}}) }}
+                {% if editFormulaForm.vars.data.id is defined %}
+                <button type="button"
+                        class="btn btn-danger ms-1 my-3"
+                        data-action="click->formula-edition#removeFormula"
+                >Supprimer</button>
+                {% endif %}
             </div>
             {{ form_row(editFormulaForm._token)}}
         </div>

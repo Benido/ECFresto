@@ -4,7 +4,7 @@
         method="{{ editDishForm.vars.method }}">
     <div class="card m-3">
         <div class="card-header d-flex justify-content-between">
-            <h4 class="card-title">{{ editDishForm.title.vars.data != "" ? 'Editer le ' : 'Ajouter un '}}plat</h4>
+            <h4 class="card-title">{{ editDishForm.title.vars.data == "" ? 'Ajouter un plat' : 'Éditer ' }}{{ editDishForm.title.vars.data }}</h4>
             <button type="button"
                     class="btn-close"
                     data-controller="close-form"
@@ -56,7 +56,15 @@
                 </div>
             </div>
             <div class=" d-flex justify-content-center">
-                {{ form_row(editDishForm.submit, {'attr': {'class': 'btn btn-secondary my-3'}}) }}
+                {{ form_widget(editDishForm.submit, {'attr': {'class': 'btn btn-secondary my-3'}}) }}
+                {% if editDishForm.vars.data.id is defined %}
+                <button type="button"
+                        class="btn btn-danger ms-2 my-3"
+                        data-controller="dish-edition"
+                        data-dish-edition-id-value="{{ editDishForm.vars.data.id }}"
+                        data-action="click->dish-edition#removeDish"
+                >Supprimer</button>
+                {% endif %}
             </div>
             {{ form_row(editDishForm._token)}}
         </div>

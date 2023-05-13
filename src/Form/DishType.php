@@ -40,7 +40,8 @@ class DishType extends AbstractType
                     'class' => Allergen::class,
                     'choice_label' => 'title',
                     'multiple' => true,
-                    'help' => 'Vous pouvez sélectionner plusieurs allergènes'
+                    'help' => 'Vous pouvez sélectionner plusieurs allergènes',
+                    'required'=> false,
 
                 ]
             )

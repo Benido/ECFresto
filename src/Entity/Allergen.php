@@ -24,7 +24,7 @@ class Allergen
     #[ORM\ManyToMany(targetEntity: Reservation::class, mappedBy: 'allergens')]
     private Collection $reservations;
 
-    #[ORM\ManyToMany(targetEntity: Client::class, mappedBy: 'Allergens')]
+    #[ORM\ManyToMany(targetEntity: Client::class, mappedBy: 'allergens')]
     private Collection $clients;
 
     public function __construct()

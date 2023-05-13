@@ -14,4 +14,21 @@ export default class extends Controller {
             }
         })
     }
+
+    removeDish() {
+        $.ajax({
+            url: '/administration/publier-menus/supprimer-plat/' + this.idValue,
+            type: 'POST',
+            success: function () {
+                $.ajax({
+                    url: '/administration/publier-menus',
+                    type: 'POST',
+                    //On remplace le contenu de la section "Menus"
+                    complete: function(data){
+                        $('#plats').replaceWith($(data.responseText).find('#plats'))
+                    }
+                })
+            }
+        })
+    }
 }
