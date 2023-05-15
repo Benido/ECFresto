@@ -51,14 +51,20 @@ class AvailableReservationDateGetter
             //On vérifie que le restaurant est ouvert
             if ($item[0]) {
                 $timeSlotsSub = [];
-                if ($this->checkOccupancy($maxCapacity, $item[0], $interval45)) {
+                if (
+                    $this->checkOccupancy($maxCapacity, $item[0], $interval45)
+                    && $item[0] > new DateTime())
+                {
                     $timeSlotsSub[$item[0]->format('H:i')] = $item[0];
                 }
                 $tempSlot = clone $item[0];
                 while ($tempSlot < $item[1]) {
                     $newSlot = clone $tempSlot->add($interval15);
-                    //On vérifie le taux d'occupation du restaurant avant d'ajouter le créneau
-                    if ($this->checkOccupancy($maxCapacity, $newSlot, $interval45)) {
+                    //On enlève les créneaux antérieurs à l'heure de la requête
+                    // et on vérifie le taux d'occupation du restaurant avant d'ajouter le créneau
+                    if ($this->checkOccupancy($maxCapacity, $newSlot, $interval45)
+                        && $newSlot > new DateTime())
+                    {
                         $timeSlotsSub[$newSlot->format('H:i')] = $newSlot;
                     }
                 }
