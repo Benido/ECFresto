@@ -1,14 +1,66 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomepageController!{% endblock %}
+{% block title %}Accueil Le Quai Antique{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; background: coral }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+<div class="container">
+    <div class="d-flex flex-column"></div>
+    <section id="introduction" class="bg-light my-3 p-3">
+        <div class="row">
+            <div class="col">
+                <img src="{{ asset('images/bar-gcca063edc-1920-6462a1168d2bf638005620.jpg') | imagine_filter('medium') }}" alt="bar picture">
+            </div>
+            <div class="col">
+                <h2>
+                    <small class="text-body-secondary">dolor sit amet</small><br/>
+                    Lorem Ipsum
+                </h2>
+                <p>dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur...
+                </p>
+            </div>
+        </div>
+    </section>
+    <section id="mise_en_avant" class=" bg-light my-3 p-3">
+        <div class="row">
+            <div class="col">
+                <h2>
+                    <small class="text-body-secondary">Vitae justo eget magna</small><br/>
+                    fermentum iaculis
+                </h2>
+                <p>Vitae justo eget magna fermentum iaculis eu non diam. Nisl suscipit adipiscing bibendum est ultricies.
+                    Sit amet porttitor eget dolor morbi non arcu. Ipsum a arcu cursus vitae congue mauris rhoncus. Mauris in aliquam sem fringilla ut morbi tincidunt augue.
+                    Arcu non sodales neque sodales ut etiam sit. Mi ipsum faucibus vitae aliquet. Tristique sollicitudin nibh sit amet. I
+                    In iaculis nunc sed augue lacus viverra vitae congue eu. Pellentesque diam volutpat commodo sed egestas egestas.
+                </p>
+            </div>
+            <div class="col">
+                <img src="{{ asset('images/table-g09fca0e5a-1920-6462854f48ff4411520718.jpg') | imagine_filter('medium') }}" alt="bar picture">
+            </div>
+        </div>
+    </section >
+    <section id="galerie" class="bg-light p-3">
+        <div class="row" data-masonry='{"percentPosition": true }'>
+            {% for image in images %}
+                <div class="col-sm-6 col-lg-4 mb-4">
+                    <a href="#">
+                        <img src="{{ vich_uploader_asset(image, 'imageFile') | imagine_filter(('masonry_thumb')) }}"
+                             alt="..."
+                             class="">
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="d-flex justify-content-center my-3">
+            <a href="{{ path('app_reservation') }}" type="button" class="btn btn-primary btn-lg">Réserver</a>
+        </div>
+    </section>
 
-<div class="example-wrapper">
-    <h1>Contenu</h1>
 </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {# script JS permettant d'appliquer une disposition façon maçonnerie à la grille Bootstrap #}
+    <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous" async></script>
 {% endblock %}

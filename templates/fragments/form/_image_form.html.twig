@@ -1,0 +1,40 @@
+<form
+    name="{{ imageForm.vars.full_name }}"
+    action="{{ imageForm.vars.action }}"
+    method="{{ imageForm.vars.method }}"
+    enctype="multipart/form-data">
+    <div>
+        <div class="d-flex justify-content-between">
+            <h4>{{ imageForm.vars.data.id is defined ? 'Éditer l\'' : 'Ajouter une ' }} image</h4>
+            <button type="button"
+                    class="btn-close"
+                    data-controller="close-form"
+                    data-action="click->close-form#closeForm"
+                    aria-label="Close"></button>
+        </div>
+    </div>
+    <div>
+        {{ form_row(imageForm.imageFile, {
+            'attr': {'class': 'form-control'},
+            'label': 'Ajouter un fichier'
+        }) }}
+        {{ form_row(imageForm.title, {
+            'attr': {'class': 'form-control'},
+            'label': 'Titre'
+        }) }}
+    </div>
+    <div>
+        <div class="d-flex flex-column justify-content-center align-items-center">
+            {{ form_widget(imageForm.submit, {'attr': {'class': 'btn btn-secondary my-3'}}) }}
+            {% if imageForm.vars.data.id is defined %}
+                <button type="button"
+                        class="btn btn-danger ms-2 my-3"
+                        data-controller="image-edition"
+                        data-image-edition-id-value="{{ imageForm.vars.data.id }}"
+                        data-action="click->image-edition#removeImage"
+                >Supprimer</button>
+            {% endif %}
+        </div>
+        {{ form_row(imageForm._token)}}
+    </div>
+</form>
