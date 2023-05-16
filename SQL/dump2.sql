@@ -159,6 +159,16 @@ CREATE TABLE restaurant
     COLLATE `utf8mb4_unicode_ci`
     ENGINE = InnoDB;
 
+CREATE TABLE image
+(
+    id    INT AUTO_INCREMENT NOT NULL,
+    title VARCHAR(255)       NOT NULL,
+    image_name VARCHAR(255) DEFAULT NULL,
+    image_size INT DEFAULT NULL,
+    updated_at DATETIME DEFAULT NULL COMMENT '(DC2Type:datetime_immutable)',
+    PRIMARY KEY(id)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB;
+
 CREATE TABLE messenger_messages
 (
     id BIGINT AUTO_INCREMENT NOT NULL,
@@ -248,3 +258,4 @@ ALTER TABLE reservation_allergen
         FOREIGN KEY (allergen_id)
             REFERENCES allergen (id)
             ON DELETE CASCADE;
+
