@@ -4,14 +4,28 @@ liip_imagine:
     driver: "gd"
 
     filter_sets:
-        thumb:
+        thumb_200:
+            quality: 75
+            filters:
+                thumbnail:
+                    size: [ 200, 200 ]
+                    mode: 'inset'
+
+        thumb_300:
             quality: 75
             filters:
                 thumbnail:
                     size: [300, 300]
                     mode: 'inset'
 
-        medium:
+        medium_400:
+            quality: 75
+            filters:
+                thumbnail:
+                    size: [ 500, 500 ]
+                    mode: 'inset'
+
+        medium_500:
             quality: 75
             filters:
                 thumbnail:

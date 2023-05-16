@@ -1,19 +1,22 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Accueil Le Quai Antique{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('homepage_styles') }}
+{% endblock %}
 
 {% block body %}
 <div class="container">
-    <div class="d-flex flex-column"></div>
     <section id="introduction" class="bg-light my-3 p-3">
         <div class="row">
             <div class="col">
-                <img src="{{ asset('images/bar-gcca063edc-1920-6462a1168d2bf638005620.jpg') | imagine_filter('medium') }}" alt="bar picture">
+                <img src="{{ asset('images/accueil/des-recits-NaKwyyh849o-unsplash.webp') | imagine_filter('medium_500') }}" alt="table en Savoie">
             </div>
             <div class="col">
                 <h2>
-                    <small class="text-body-secondary">dolor sit amet</small><br/>
-                    Lorem Ipsum
+                    <small class="text-body-secondary">Découvrez</small><br/>
+                    Le quai antique
                 </h2>
                 <p>dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                     Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
@@ -23,32 +26,48 @@
         </div>
     </section>
     <section id="mise_en_avant" class=" bg-light my-3 p-3">
-        <div class="row">
+        <div class="row my-3">
             <div class="col">
                 <h2>
-                    <small class="text-body-secondary">Vitae justo eget magna</small><br/>
-                    fermentum iaculis
+                    <small class="text-body-secondary">Bienvenue dans la Savoie de </small><br/>
+                   Arnaud Michant
                 </h2>
                 <p>Vitae justo eget magna fermentum iaculis eu non diam. Nisl suscipit adipiscing bibendum est ultricies.
                     Sit amet porttitor eget dolor morbi non arcu. Ipsum a arcu cursus vitae congue mauris rhoncus. Mauris in aliquam sem fringilla ut morbi tincidunt augue.
-                    Arcu non sodales neque sodales ut etiam sit. Mi ipsum faucibus vitae aliquet. Tristique sollicitudin nibh sit amet. I
-                    In iaculis nunc sed augue lacus viverra vitae congue eu. Pellentesque diam volutpat commodo sed egestas egestas.
+                    Arcu non sodales neque sodales ut etiam sit.
                 </p>
             </div>
             <div class="col">
-                <img src="{{ asset('images/table-g09fca0e5a-1920-6462854f48ff4411520718.jpg') | imagine_filter('medium') }}" alt="bar picture">
+                <img src="{{ asset('images/accueil/redcharlie-redcharlie1-t-7KEq9M0b0-unsplash.webp') | imagine_filter('thumb_300') }}" alt="Chef Arnaud Michant au travail">
             </div>
+        </div>
+        <div class="row my-3">
+            <div class="col">
+                <img src="{{ asset('images/accueil/martin-widenka-tkfRSPt-jdk-unsplash.webp') | imagine_filter('thumb_300') }}" alt="plat de poisson">
+            </div>
+            <div class="col">
+                <h2>
+                    <small class="text-body-secondary">Venez vivre une </small><br/>
+                    Expérience gastronomique
+                </h2>
+                <p>Nec ultrices dui sapien eget mi proin. Cras pulvinar mattis nunc sed.
+                    Tempus egestas sed sed risus pretium quam vulputate dignissim suspendisse.
+                    Sit amet mattis vulputate enim nulla aliquet porttitor lacus.
+                </p>
+            </div>
+
         </div>
     </section >
     <section id="galerie" class="bg-light p-3">
         <div class="row" data-masonry='{"percentPosition": true }'>
             {% for image in images %}
                 <div class="col-sm-6 col-lg-4 mb-4">
-                    <a href="#">
+                    <div class="position-relative">
                         <img src="{{ vich_uploader_asset(image, 'imageFile') | imagine_filter(('masonry_thumb')) }}"
                              alt="..."
                              class="">
-                    </a>
+                        <div class="pic-title position-absolute text-center text-light fs-4">{{ image.getTitle }}</div>
+                    </div>
                 </div>
             {% endfor %}
         </div>

@@ -1,29 +1,29 @@
-<header style="display: flex; justify-content: center; width: 100%">
-    <div style="
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            min-width: 50%;
-            background: lightblue">
-        <div style="font-size: 3rem"><a href="{{  path('app_homepage') }}">LOGO</a></div>
-        <div style="font-size: 1.5rem">
-            <ul style="display: flex; list-style: none">
-                <li style="margin:1rem"><a href="{{  path('app_le_restaurant') }}">LE RESTAURANT</a></li>
-                <li style="margin:1rem"><a href="{{  path('app_menus') }}">MENUS</a></li>
-                <li style="margin:1rem"><a href="{{  path('app_reservation') }}">RÉSERVATION</a></li>
-                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                <li style="margin:1rem"><a href="{{  path('app_logout') }}">DÉCONNEXION</a></li>
-                {% else %}
-                <li style="margin:1rem"><a href="{{  path('app_login') }}">CONNEXION</a></li>
-                {% endif %}
-                {% if not app.user %}
-                <li style="margin:1rem"><a href="{{  path('app_register') }}">CRÉER UN COMPTE</a></li>
-                {% elseif is_granted('ROLE_ADMIN') %}
-                <li style="margin:1rem"><a href="{{  path('app_administration') }}">PANNEAU D'ADMINISTRATION</a></li>
-                {% elseif is_granted('ROLE_CLIENT') %}
-                <li style="margin:1rem"><a href="{{  path('app_client_preferences') }}">PRÉFÉRENCES</a></li>
-                {% endif %}
-            </ul>
+<header class="d-flex justify-content-center" style="background: lightblue">
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{{ path('app_homepage') }}">LOGO</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="{{  path('app_le_restaurant') }}">LE RESTAURANT</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{  path('app_menus') }}">MENUS</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{  path('app_reservation') }}">RÉSERVATION</a></li>
+                    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                        <li class="nav-item"><a class="nav-link" href="{{  path('app_logout') }}">DÉCONNEXION</a></li>
+                    {% else %}
+                        <li class="nav-item"><a class="nav-link" href="{{  path('app_login') }}">CONNEXION</a></li>
+                    {% endif %}
+                    {% if not app.user %}
+                        <li class="nav-item"><a class="nav-link" href="{{  path('app_register') }}">CRÉER UN COMPTE</a></li>
+                    {% elseif is_granted('ROLE_ADMIN') %}
+                        <li class="nav-item"><a class="nav-link" href="{{  path('app_administration') }}">PANNEAU D'ADMINISTRATION</a></li>
+                    {% elseif is_granted('ROLE_CLIENT') %}
+                        <li class="nav-item"><a class="nav-link" href="{{  path('app_client_preferences') }}">PRÉFÉRENCES</a></li>
+                    {% endif %}
+                </ul>
+            </div>
         </div>
-    </div>
+    </nav>
 </header>
