@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block body %}
-<div class="container">
+<div class="container py-5">
     <section id="introduction" class="bg-light my-3 p-3">
         <div class="row">
             <div class="col">
@@ -66,7 +66,7 @@
                         <img src="{{ vich_uploader_asset(image, 'imageFile') | imagine_filter(('masonry_thumb')) }}"
                              alt="..."
                              class="">
-                        <div class="pic-title position-absolute text-center text-light fs-4">{{ image.getTitle }}</div>
+                        <div class="pic-title position-absolute top-0 start-0 text-center text-light fs-4 ms-2">{{ image.getTitle }}</div>
                     </div>
                 </div>
             {% endfor %}

@@ -1,6 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Éditer les plats{% endblock %}
+{% block title %}Éditer les menus{% endblock %}
+
+{% block sidebar %}
+    {% include('fragments/layout/_admin_sidebar.html.twig')%}
+{% endblock %}
 
 {% block body %}
 <div id="dashboardWrapper" class="w-100 h-100 d-flex">

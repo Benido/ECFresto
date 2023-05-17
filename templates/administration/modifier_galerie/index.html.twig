@@ -2,10 +2,14 @@
 
 {% block title %}Modifier la galerie{% endblock %}
 
+{% block sidebar %}
+    {% include('fragments/layout/_admin_sidebar.html.twig')%}
+{% endblock %}
+
 {% block body %}
     <div id="dashboardWrapper" class="w-100 h-100 d-flex">
         {{ include('fragments/layout/_admin_sidebar.html.twig')}}
-        <div class="container">
+        <div class="container py-5">
             <h1>Modifier la galerie</h1>
             <section id="images" class="p-2 m-3 bg-light">
                 <h2>Toutes les images</h2>
@@ -35,16 +39,6 @@
                             </div>
                         </div>
                     {% endfor %}
-
-                </div>
-            </section>
-            <section id="form" class="p-2 m-3 bg-light">
-                <h2>Toutes les galeries</h2>
-                <div>
-                    <h3>Page d'accueil</h3>
-                </div>
-                <div>
-
                 </div>
             </section>
         </div>

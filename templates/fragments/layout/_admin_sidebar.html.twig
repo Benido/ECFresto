@@ -1,9 +1,13 @@
-<div class="d-flex bg-info ">
-    <nav id="admin-sidebar" class="nav flex-column min-vh-100h collapse collapse-horizontal" style="width: 300px">
+<div id="sidebar" class="d-flex bg-info position-fixed min-vh-100h">
+    <nav id="admin-sidebar" class="nav flex-column collapse collapse-horizontal pt-3">
         <a class="nav-link" href="{{ path('app_administration_modifier_galerie') }}">Modifier galerie</a>
         <a class="nav-link" href="{{path('app_administration_publier_menus')}}">Publier les menus</a>
-        <a class="nav-link" href="{{ path('app_business_hours_update') }}">Éditer les horaires</a>
-        <a class="nav-link" href="#">Consulter les réservations</a>
+        <a class="nav-link" href="{{ path('app_administration_business_hours_update') }}">Éditer les horaires</a>
+        <a class="nav-link" href="{{ path('app_administration_admin') }}">Préférences Admin</a>
     </nav>
-    <div role="button" data-bs-toggle="collapse" data-bs-target="#admin-sidebar" style="width: 30px" ></div>
+    <div role="button"
+         data-bs-toggle="collapse"
+         data-bs-target="#admin-sidebar"
+         aria-expanded="false"
+         style="width: 30px; height: 100vh"></div>
 </div>

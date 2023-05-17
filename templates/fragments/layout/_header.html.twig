@@ -1,5 +1,5 @@
-<header class="d-flex justify-content-center" style="background: lightblue">
-    <nav class="navbar navbar-expand-lg">
+<header id="header" class="" >
+    <nav class="navbar navbar-expand-lg fixed-top bg-body-tertiary" style="background: lightblue">
         <div class="container-fluid">
             <a class="navbar-brand" href="{{ path('app_homepage') }}">LOGO</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -18,7 +18,17 @@
                     {% if not app.user %}
                         <li class="nav-item"><a class="nav-link" href="{{  path('app_register') }}">CRÉER UN COMPTE</a></li>
                     {% elseif is_granted('ROLE_ADMIN') %}
-                        <li class="nav-item"><a class="nav-link" href="{{  path('app_administration') }}">PANNEAU D'ADMINISTRATION</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                ADMINISTRATION
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{{ path('app_administration_modifier_galerie') }}">Modifier galerie</a></li>
+                                <li><a class="dropdown-item" href="{{path('app_administration_publier_menus')}}">Publier les menus</a></li>
+                                <li><a class="dropdown-item" href="{{ path('app_administration_business_hours_update') }}">Éditer les horaires</a></li>
+                                <li><a class="dropdown-item" href="{{ path('app_administration_admin') }}">Préférences Admin</a></li>
+                            </ul>
+                        </li>
                     {% elseif is_granted('ROLE_CLIENT') %}
                         <li class="nav-item"><a class="nav-link" href="{{  path('app_client_preferences') }}">PRÉFÉRENCES</a></li>
                     {% endif %}

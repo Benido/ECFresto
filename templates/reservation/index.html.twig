@@ -3,9 +3,11 @@
 {% block title %}Hello ReservationController!{% endblock %}
 
 {% block body %}
-<div class="container">
+<div class="container py-5">
     <div class="row">
         <h1 class="text-center my-3">Réservation</h1>
+        <p class="w-75 mx-auto">Merci d'avance de préciser en commentaire le nombre d'enfants présent à table (s'il y en a).
+        Pour tout retard de plus de 20 minutes, votre table sera donnée à un autre client !</p>
         <form id="reservation_form" name="{{ field_name(reservation) }}" method="post"  data-controller="time-slot">
             <div id="reservation_seats_day_selection" class="row my-3">
                 <div class="col">

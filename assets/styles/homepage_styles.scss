@@ -1,0 +1,16 @@
+//Positionne les titre en dessous de la pile par rapport aux images
+.pic-title {
+    z-index: -1;
+}
+
+//Sélectionne le titre situé directement après l'image survolée et le positionne au-dessus dans la pile
+#galerie img:hover + div {
+    z-index: 2;
+}
+
+//Diminue la luminosité de l'image lors du survol
+#galerie img:hover {
+    filter: brightness(30%);
+}
+
+
