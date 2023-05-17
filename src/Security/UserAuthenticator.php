@@ -52,7 +52,7 @@ class UserAuthenticator extends AbstractLoginFormAuthenticator
             return $role;
         }, $roles);
         if (in_array('ROLE_ADMIN', $rolesTab) || in_array('ROLE__ADMIN', $rolesTab)) {
-            return new RedirectResponse($this->urlGenerator->generate('app_administration'));
+            return new RedirectResponse($this->urlGenerator->generate('app_administration_admin'));
         }
         else{
             return new RedirectResponse($this->urlGenerator->generate('app_client_preferences'));

@@ -19,7 +19,8 @@ class ImageFormType extends AbstractType
                 'required' => false,  //pour ne pas redemander un upload du fichier pour une simple édition
                 'image_uri' => false,
                 'download_uri' => false,
-                'constraints' => [new  Assert\File([
+                'constraints' => [
+                    new  Assert\File([
                     'maxSize' => '4096k',
                     'maxSizeMessage' => 'La taille maximum autorisée pour une image est de 2 MO',
                     'uploadErrorMessage' => 'Une erreur est survenue lors du chargement',
