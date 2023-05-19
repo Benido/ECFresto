@@ -1,0 +1,20 @@
+header {
+  background-color: $bistre;
+  color: $beige;
+}
+
+.navbar-nav {
+  justify-content: center;
+}
+
+.navbar-bg {
+  background-color: $bistre;
+}
+
+.navbar-brand {
+  font-family: 'Dancing Script', serif;
+}
+
+.navbar-brand, .nav-link, .navbar-toggler-icon {
+  color: $beige;
+}

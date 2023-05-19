@@ -1,11 +1,80 @@
 @import '~bootstrap';
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css");
 
+//set the font colors
+$beige: #B6AC97;
+$beige-clair:#e7e2dc;
+
+$bistre: #392C1E;
+$bronze: #906427;
+
+@import 'header';
+@import 'footer';
+
+//Set the font-families
+@font-face {
+    font-family: 'Montserrat';
+    src: url('./fonts/Montserrat-VariableFont_wght.ttf') format('truetype'),
+}
+
+@font-face {
+    font-family: 'Lora';
+    src: url('./fonts/Lora-VariableFont_wght.ttf') format('truetype'),
+}
+
+@font-face {
+    font-family: 'Hind Madurai';
+    src: url('./fonts/HindMadurai-Regular.ttf') format('truetype'),
+}
+
+@font-face {
+    font-family: 'Dancing Script';
+    src: url('./fonts/DancingScript-VariableFont_wght.ttf') format('truetype')
+}
+
+$font-family-base: "Lora", serif;
+$headings-font-family: "Montserrat", sans-serif;
+
+
+
 body {
-    font-family: sans-serif;
-    background-color: lightgray;
+    font-family: $font-family-base;
+    background-color: $beige-clair;
+    color: $bistre;
+}
+
+h1, h2, h3, h4, h5, h6, .nav-link {
+    font-family: $headings-font-family;
+}
+
+small, input, label {
+    font-family: "Hind Madurai", sans-serif;
+}
+
+.bg-beige-clair { background-color: $beige-clair; }
+
+.bg-beige { background-color: $beige; }
+
+.bg-bronze { background-color: $bronze; }
+
+.text-beige-clair { color: $beige-clair; }
+
+.text-beige { color: $beige; }
+
+.text-bronze { color: $bronze; }
+
+input[type=checkbox] {
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
 }
 
 #sidebar {
-    z-index: 1000;
 }
+
+
+
+
+
+
+
+

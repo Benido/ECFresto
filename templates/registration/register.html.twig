@@ -3,15 +3,32 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
+    <div class="container">
+        <div class="d-flex flex-column align-items-center">
+            <h1 class="mt-5">Créer un compte</h1>
+            <p>Créer un compte vous permettra de consulter et d'annuler vos réservations,
+                d'enregistrer un nombre de couvert par défaut ainsi que vos allergènes</p>
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+            {{ form_start(registrationForm, {attr: {class: ''}}) }}
+            {{ form_row(registrationForm.email, {
+                attr: {class: 'form-control mb-3'},
+                label_attr: {class: 'mt-3'}
+            }) }}
+            {{ form_row(registrationForm.plainPassword, {
+                label: 'Mot de passe',
+                attr: {class: 'form-control mb-3'},
+                label_attr: {class: 'mt-3'}
+            }) }}
+            {{ form_row(registrationForm.agreeTerms, {
+                label: 'Accepter les conditions',
+                label_attr: {class: 'me-2'}
+            }) }}
+            <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-lg btn-secondary mt-3 mb-5">S'enregistrer</button>
+            </div>
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+
+            {{ form_end(registrationForm) }}
+        </div>
+    </div>
 {% endblock %}

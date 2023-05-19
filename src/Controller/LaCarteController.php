@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Menu;
 use App\Repository\DishCategoryRepository;
 use App\Repository\DishRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,7 +23,7 @@ class LaCarteController extends AbstractController
     }
 
     #[Route('/la-carte', name: 'app_menus_la_carte')]
-    public function laCarte(DishRepository $dishRepository, DishCategoryRepository $dishCategoryRepository): Response
+    public function displayCarte(DishRepository $dishRepository, DishCategoryRepository $dishCategoryRepository): Response
     {
         $dishCategories = $dishCategoryRepository->findAll();
         $allDishes = $dishRepository->findAll();
@@ -33,13 +34,16 @@ class LaCarteController extends AbstractController
         ]);
     }
 
-    #[Route('/les-menus', name: 'app_menus_les_menus')]
-    public function lesMenus(): Response
+    #[Route('/{menu}', name: 'app_menus')]
+    public function displayMenus(Menu $menu, DishCategoryRepository $dishCategoryRepository): Response
     {
+        $dishes = $menu->getDishes();
+        $dishCategories = $dishCategoryRepository->findAll();
 
-
-        return $this->render('menus/la_carte/index.html.twig', [
-
+        return $this->render('menus/menus/index.html.twig', [
+            'menu' => $menu,
+            'dishes' => $dishes,
+            'categories' => $dishCategories
         ]);
     }
 }

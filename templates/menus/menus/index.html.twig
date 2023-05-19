@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}La carte{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="my-5">
+                <h1 class="mb-5 text-center text-bronze">{{ menu.getTitle }}</h1>
+                <div class="row-cols-1 px-5">
+                {% for formula in menu.getFormula %}
+                    <div class="col text-center mb-5">
+                        <h3 class="h5 text-bronze">Formule {{ formula.getTitle }}</h3>
+                        <div><small class="text-beige">({{ formula.getTemporality }})</small></div>
+                        <p>{{ formula.getDescription }} {{ formula.getPrice }}€</p>
+                    </div>
+                {% endfor %}
+                </div>
+            {% for category in categories %}
+                <div class="p-3">
+                    <h2 class="mb-3">{{ category.getTitle }}</h2>
+                    {% for dish in dishes %}
+                        {% if dish.getCategory.getTitle == category.getTitle %}
+                            <div class="row px-2 m-1 ms-2 bg-beige">
+                                <div class="col">
+                                    <h3 class="h5 mt-3">{{ dish.getTitle }}</h3>
+                                    <div><em>{{ dish.getDescription }}</em></div>
+                                    <p class="text-secondary"><small>
+                                            {% for allergen in dish.getAllergens %}
+                                                {{ allergen.getTitle }}
+                                            {% endfor %}
+                                        </small></p>
+                                </div>
+                                <div class="col-auto fs-4 text-end text-beige-clair py-3 pe-3">
+                                    <strong class="">{{ dish.getPrice }}€</strong>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <p class="text-center">* * * * *</p>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

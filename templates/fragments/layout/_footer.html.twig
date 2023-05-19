@@ -1,20 +1,25 @@
-<footer class="d-flex justify-content-center min-vw-100 mt-auto" style="background: lightblue">
-    <div class="d-flex flex-column justify-content-around align-items-center p-3">
-        <div class="h2">LOGO</div>
-        <div class="h4">Adresse</div>
-        <div class="h5">
-            <h3>Horaires d'ouverture</h3>
+<footer class="d-flex flex-column justify-content-center align-items-center min-vw-100 mt-auto p-4">
+        <div class="h2">Quai Antique</div>
+        <div class="row row-cols-1 row-cols-lg-3 w-100">
+        <div class="col h5 text-center mt-5">8 rue de la république, <br>73000 CHAMBÉRY</div>
+        <div class="col-auto mx-auto mt-5 px-5">
+            <h5 class="text-center">Horaires d'ouverture</h5>
             {% for key, hours in weeklyBusinessHours %}
-                {{ key }} :
+                <div class="d-flex align-items-center mb-1">
+                    <div>{{ key }} :</div>
                 {% if hours.0|first is not null %}
+                    <div class="ms-auto">
                     {% for hour in hours %}
-                        {{ hour.0 }} - {{ hour.1}}
+                        <div class="">{{ hour.0 }} - {{ hour.1 }}</div>
                     {% endfor%}
+                    </div>
                 {% else %}
-                    fermé
+                    <div class="ms-auto me-4"><em>fermé</em></div>
                 {% endif %}
-                <br>
+                </div>
             {% endfor %}
         </div>
+            <div class="col h5 text-center mt-5">Téléphone : <br> 01 23 45 67 89</div>
     </div>
+
 </footer>

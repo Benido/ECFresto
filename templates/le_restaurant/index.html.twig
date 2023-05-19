@@ -3,10 +3,10 @@
 {% block title %}Hello LeRestaurantController!{% endblock %}
 
 {% block body %}
-    <div class="container py-5">
-        <section id="concept" class="my-5">
-            <div class="row">
-                <div class="col">
+    <div class="container-lg py-5">
+        <section id="concept" class="my-5 p-3">
+            <div class="row row-cols-1 row-cols-lg-2">
+                <div class="col d-flex justify-content-center">
                     <div class="row">
                         <div class="col-auto d-flex flex-column">
                             <div class="mb-auto">
@@ -25,7 +25,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col">
+                <div class="col d-flex flex-column justify-content-center mt-5 mt-lg-0">
                     <h3>Notre concept</h3>
                     <p>Ultricies mi quis hendrerit dolor magna eget est. Ut pharetra sit amet aliquam id diam maecenas ultricies.
                         Lorem ipsum dolor sit amet consectetur adipiscing elit duis. Pellentesque dignissim enim sit amet venenatis.
@@ -33,35 +33,36 @@
                 </div>
             </div>
         </section>
-        <section id="chef" class="my-5">
-            <div class="row my-3">
-                <div class="col">
+        <section id="chef" class="my-5 p-3 bg-light">
+            <div class="row row-cols-1 row-cols-lg-2">
+                <div class="col d-flex flex-column justify-content-center mb-5 mb-lg-0">
                     <h3>Le chef</h3>
                     <p>Tortor id aliquet lectus proin nibh nisl condimentum id. Molestie at elementum eu facilisis sed odio morbi.
                         Id diam vel quam elementum pulvinar etiam non quam lacus. Venenatis tellus in metus vulputate eu..</p>
                 </div>
-                <div class="col"><img src="{{ asset('images/restaurant/louis-hansel-v3olbe6-fhu-unsplash.webp') | imagine_filter('medium_400') }}" alt="bar picture"></div>
+                <div class="col d-flex justify-content-center">
+                    <img src="{{ asset('images/restaurant/louis-hansel-v3olbe6-fhu-unsplash.webp') | imagine_filter('thumb_300') }}" alt="bar picture"></div>
             </div>
         </section>
         <section id="equipe" class="my-5">
-            <div class="row my-3">
-                    <div class="col d-flex">
-                        <img src="{{ asset('images/restaurant/pexels-filip-rankovic-grobgaard-12276390.webp') | imagine_filter('thumb_300') }}"
-                             alt="l'hôte d'accueil" >
+            <div class="row row-cols-1 row-cols-lg-2 my-5">
+                    <div class="col d-flex flex-column align-items-center">
                         <div class="ms-3">
                             <h3>Votre hôte d'accueil</h3>
                             <p>Commodo viverra maecenas accumsan lacus vel. Sapien et ligula ullamcorper malesuada proin libero nunc.</p>
                         </div>
+                        <img src="{{ asset('images/restaurant/pexels-filip-rankovic-grobgaard-12276390.webp') | imagine_filter('thumb_300') }}"
+                             class="img-fluid mt-3 mb-5 mb-lg-0"
+                             alt="l'hôte d'accueil" >
                     </div>
-                <div class="col">
-                    <div class="">
+                    <div class="col d-flex flex-column align-items-center">
+                        <div class="">
+                            <h3>Votre sommelière</h3>
+                            <p>Eu tincidunt tortor aliquam nulla facilisi cras. Mi in nulla posuere sollicitudin aliquam ultrices sagittis. Odio eu feugiat pretium nibh.</p>
+                        </div>
                         <img src="{{ asset('images/restaurant/monica-di-loxley-FDsvtPK6pwI-unsplash.webp') | imagine_filter('thumb_300') }}"
+                             class="img-fluid mt-3"
                              alt="la sommelière" >
-                    </div>
-                    <div class="my-3">
-                        <h3>Votre sommelière</h3>
-                        <p>Eu tincidunt tortor aliquam nulla facilisi cras. Mi in nulla posuere sollicitudin aliquam ultrices sagittis. Odio eu feugiat pretium nibh.</p>
-                    </div>
                 </div>
             </div>
             <div class="row my-3">

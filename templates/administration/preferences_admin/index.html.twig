@@ -24,7 +24,7 @@
                         {{ form_label(preferences.email, 'Email', {'label_attr': {'class': 'form-label'}}) }}
                         {{ form_widget(preferences.email, {'attr': {'class': 'form-control'}})}}
                     </div>
-                    <div class="row">
+                    <div class="row row-cols-1 row-cols-lg-2">
                         <div class="col">
                             {{ form_label(preferences.newPassword, 'Nouveau mot de passe',{
                                 'label_attr' : {'class': 'form-label'}
@@ -53,7 +53,7 @@
                 <div class="d-flex justify-content-center">
                     {{ form_row(preferences.submit, {
                         'label': 'Enregister',
-                        'attr': {'class': 'btn btn-secondary my-3'}}) }}
+                        'attr': {'class': 'btn bg-bronze text-light my-3'}}) }}
                 </div>
             </form>
         </div>

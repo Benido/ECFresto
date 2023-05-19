@@ -69,11 +69,11 @@
                     {{ form_widget(reservation.email, {'attr': {'class': 'form-control'}})}}
                 </div>
                 <div class="my-3">
-                    {{ form_label(reservation.allergens) }}
+                    {{ form_label(reservation.allergens, 'Allergènes') }}
                     {{ form_widget(reservation.allergens, {'attr': {'class': 'form-control'}})}}
                 </div>
                 <div class="my-3">
-                    {{ form_label(reservation.comment) }}
+                    {{ form_label(reservation.comment, 'Commentaires') }}
                     {{ form_widget(reservation.comment, {'attr': {'class': 'form-control'}})}}
                 </div>
                 {{ form_row(reservation._token)}}

@@ -1,3 +1,5 @@
+CREATE DATABASE IF NOT EXISTS quai_antique;
+
 CREATE TABLE admin
 (
     id       BINARY(16)   NOT NULL COMMENT '(DC2Type:uuid)',
