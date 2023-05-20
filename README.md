@@ -23,3 +23,9 @@ Pour déployer le site du restaurant Quai Antique en local:
 * Toujours depuis ce répertoire, lancez la commande ```npm install``` afin d'installer les dépendances Javascript
 * Pour créer la base de données, l'utilisateur **admin** et le schéma des tables, exécuter le fichier 'dumpsql2.sql' situé dans le répertoire <span style="font-family:cascadia code">quai-antique/SQL</span>
 * Pour peupler la table de données factices, exécuter le dossier 'populate.sql' situé dans ce même répertoire
+
+### Connexion
+
+Pour se connecter en tant qu'**admin**:
+* email : admin@admin.fr
+* mot de passe : password
