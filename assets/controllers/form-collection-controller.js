@@ -18,7 +18,7 @@ export default class extends Controller {
         if( this.collectionContainerTarget.childElementCount < 4)
         {
             const item = document.createElement('li');
-            item.classList.add('list-group-item', 'p-1', 'my-1', 'hideable')
+            item.classList.add('list-group-item', 'p-3', 'my-2', 'hideable')
             item.innerHTML = this.prototypeValue.replace(/__name__/g, this.indexValue);
             this.addRemoveButton(item)
             this.setClosed()
@@ -36,6 +36,7 @@ export default class extends Controller {
     addRemoveButton(item) {
         const removeButton = document.createElement('button')
         removeButton.innerHTML = "Enlever"
+        removeButton.classList.add('btn', 'bg-bronze', 'text-light', 'm-2')
         item.appendChild(removeButton)
         removeButton.addEventListener('click', () => item.remove())
     }

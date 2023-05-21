@@ -7,18 +7,17 @@
 {% endblock %}
 
 {% block body %}
-    <div class="container py-5">
+    <div class="container p-5">
         <div class="row row-cols-1 row-cols-lg-2">
             <div class="col justify-content-center p-3" >
-                <h3>Horaires d'ouverture</h3>
+                <h3 class="text-bronze mb-5">EDITER HORAIRES</h3>
                 <ul class="list-group">
                 {% for key, hours in weeklyBusinessHours %}
                     <li    class="list-group-item my-2"
                             {{ stimulus_controller('form-reveal') }}
                             data-form-reveal-weekday-value = {{ key }}
-
                     >
-                        <button type="button" class="btn btn-secondary me-2 " {{ stimulus_action('form-reveal', 'revealForm') }} >Editer</button>
+                        <button type="button" class="btn bg-bronze text-light me-2 " {{ stimulus_action('form-reveal', 'revealForm') }} >Editer</button>
                         {{ key }} :
                         {% if hours.0|first is not null %}
                             {% for hour in hours %}
@@ -35,20 +34,33 @@
             {# Le formulaire d'édition des horaires d'ouverture, masqué au chargement de la page #}
             <div id="form" class="col p-3" hidden  >
                 {{ form_start(BusinessHoursUpdate) }}
-                <div id="formContainer" {{ stimulus_controller('form-collection') }}
+                <div id="formContainer"
+                     class=""
+                        {{ stimulus_controller('form-collection') }}
                         data-form-collection-index-value="{{ BusinessHoursUpdate.BusinessHoursFormType|length > 0 ? BusinessHoursUpdate.BusinessHoursFormType|last.vars.name + 1 : 0 }}"
                         data-form-collection-prototype-value="{{ form_widget(BusinessHoursUpdate.BusinessHoursFormType.vars.prototype)|e('html_attr') }}"
                         data-form-collection-weekday-value=""
                 >
-                    <h3 id="weekdayDisplay"></h3>
+                    <h3 id="weekdayDisplay" class="m-0 mb-lg-5"></h3>
                     <ul id="listContainer" class="list-group" {{ stimulus_target('form-collection', 'collectionContainer') }}></ul>
-                    <div>
-                        <label for="isClosed">fermé pour la journée</label>
-                        <input type="checkbox" id="isClosed" name="isClosed">
-                    </div>
-                    <button type="button" id="add"{{ stimulus_action('form-collection', 'addCollectionElement') }}>Ajouter</button>
-                </div>
 
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <label for="isClosed">fermé pour la journée</label>
+                            <input type="checkbox" id="isClosed" name="isClosed">
+                        </div>
+                        <button type="button"
+                                id="add"
+                                class="btn bg-bronze text-light m-2 text-end"
+                                {{ stimulus_action('form-collection', 'addCollectionElement') }}>Ajouter
+                        </button>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center">
+                {{ form_widget(BusinessHoursUpdate.enregistrer, {
+                    'attr': {'class': 'btn bg-bronze text-light m-2'}
+                }) }}
+                </div>
                 {{ form_end(BusinessHoursUpdate) }}
             </div>
         </div>

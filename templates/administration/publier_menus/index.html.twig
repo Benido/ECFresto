@@ -7,22 +7,21 @@
 {% endblock %}
 
 {% block body %}
-<div id="dashboardWrapper" class="w-100 h-100 d-flex">
-    {{ include('fragments/layout/_admin_sidebar.html.twig')}}
-    <div class="container">
+    <div class="container py-5 ps-3">
+        <h1 class="text-center text-bronze mb-5">PUBLIER LES MENUS</h1>
         <section id="plats" class="p-2 m-3 bg-light">
             <div data-controller="dish-edition category-edition">
                 <div class="d-flex">
                     <h2 class="">Plats</h2>
                     <div class="col-auto d-flex justify-content-end align-items-center ms-3 me-2"
                          data-action="click->dish-edition#getForm">
-                        <button type="button" class="btn btn-secondary btn-sm text-light">
+                        <button type="button" class="btn bg-bronze text-light btn-sm text-light">
                             <i class="bi bi-plus-lg"></i> Ajouter un plat
                         </button>
                     </div>
                     <div class="col-auto d-flex justify-content-end align-items-center mx-2"
                          data-action="click->category-edition#getForm">
-                        <button type="button" class="btn btn-secondary btn-sm text-light">
+                        <button type="button" class="btn bg-bronze text-light btn-sm text-light">
                             <i class="bi bi-plus-lg"></i> Ajouter une catégorie
                         </button>
                     </div>
@@ -42,7 +41,7 @@
                                 <h2 class="me-3">{{ category.getTitle }}</h2>
                                 <div class="col-auto d-flex justify-content-end align-items-center"
                                      data-action="click->category-edition#getForm"   >
-                                    <button type="button" class="btn btn-secondary btn-sm text-light">Éditer</button>
+                                    <button type="button" class="btn bg-bronze text-light btn-sm text-light">Éditer</button>
                                 </div>
                             </div>
                             <div id="edit_category_form_wrapper_{{ categoryId }}"></div>
@@ -51,27 +50,29 @@
                                 {% for dish in allDishes %}
                                     {% if dish.getCategory.getTitle == category.getTitle %}
                                         {% set dishId = dish.getId %}
-                                        <li class="list-group-item"
+                                        <li class="list-group-item bg-beige-clair"
                                             data-controller="dish-edition"
                                             data-dish-edition-id-value="{{ dishId }}">
                                             <div class="row">
-                                                <div class="col d-flex px-2 m-1 bg-light">
+                                                <div class="col d-flex justify-content-between px-2 m-1">
                                                     <div class="">
                                                         <h3 class="h4 mb-1">{{ dish.getTitle }}</h3>
                                                         <div><em>{{ dish.getDescription }}</em></div>
-                                                        <div class="text-secondary"><small>
+                                                        <div class="text-beige"><small>
                                                                 {% for allergen in dish.getAllergens %}
                                                                     {{ allergen.getTitle }}
                                                                 {% endfor %}
                                                          </small></div>
                                                     </div>
-                                                    <div class="w-100 text-secondary fs-4 text-end pe-3">
-                                                        <strong>{{ dish.getPrice }}€</strong>
+                                                    <div class="d-flex flex-column justify-content-center align-items-center">
+                                                        <div class=" text-bronze fs-4 text-center">
+                                                            <strong>{{ dish.getPrice }}€</strong>
+                                                        </div>
+                                                        <div class="d-flex justify-content-end align-items-center mt-auto"
+                                                             data-action="click->dish-edition#getForm"   >
+                                                            <button type="button" class="btn bg-bronze text-light btn-sm text-light">Éditer</button>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-auto d-flex justify-content-end align-items-center"
-                                                     data-action="click->dish-edition#getForm"   >
-                                                    <button type="button" class="btn btn-secondary btn-sm text-light">Éditer</button>
                                                 </div>
                                             </div>
                                             <div id="edit_dish_form_wrapper_{{ dishId }}"></div>
@@ -90,7 +91,7 @@
                     <h2 class="">Menus</h2>
                     <div class="d-flex align-items-center mx-3"
                          data-action="click->menu-edition#getForm"   >
-                        <button type="button" class="btn btn-secondary btn-sm text-light">
+                        <button type="button" class="btn bg-bronze text-light btn-sm text-light">
                             <i class="bi bi-plus-lg"></i> Ajouter un menu
                         </button>
                     </div>
@@ -132,14 +133,14 @@
                                          data-controller="formula-edition"
                                          data-formula-edition-menuId-value="{{ menuId }}">
                                         <button type="button"
-                                                class="btn btn-secondary btn-sm text-light"
+                                                class="btn bg-bronze text-light btn-sm text-light"
                                                 data-action="click->formula-edition#getForm" >
                                             <i class="bi bi-plus-lg"></i> Ajouter une formule</button>
                                     </div>
                                 </div>
                                 <div class="col d-flex justify-content-end align-items-center"
                                      data-action="click->menu-edition#getForm"   >
-                                    <button type="button" class="btn btn-secondary btn-sm text-light">Éditer</button>
+                                    <button type="button" class="btn bg-bronze text-light btn-sm text-light">Éditer</button>
                                 </div>
                             </div>
                             <div id="edit_menu_form_wrapper_{{ menuId }}"></div>
@@ -155,7 +156,7 @@
                     <div class="d-flex align-items-center mx-2"
                          data-controller="allergen-edition"
                          data-action="click->allergen-edition#getForm">
-                        <button type="button" class="btn btn-secondary btn-sm text-light">
+                        <button type="button" class="btn bg-bronze text-light btn-sm text-light">
                             <i class="bi bi-plus-lg"></i> Ajouter un allergène
                         </button>
                     </div>
