@@ -16,11 +16,21 @@ Pour déployer le site du restaurant Quai Antique en local:
 * Git
 
 ### Installation
-* Depuis le répertoire où vous souhaitez installer le projet, ouvrez un terminal et clonez ce dépôt à l'aide de la commande ```git clone <adresse>```, où <adresse> sera remplacé selon votre configuration par : 
+* Depuis le répertoire où vous souhaitez installer le projet, ouvrez un terminal et clonez ce dépôt à l'aide de la commande ```git clone <<adresse>>```, où <<adresse>> sera remplacé selon votre configuration par : 
   * En SSH => git@github.com:Benido/quai-antique.git
   * En https => https://github.com/Benido/quai-antique.git
 * Depuis le répertoire du projet, lancez la commande ```composer install``` afin d'installer les dépendances PHP
 * Toujours depuis ce répertoire, lancez la commande ```npm install``` afin d'installer les dépendances Javascript
+* Dans le fichier .env, ajouter les lignes suivantes : 
+  * <span style="font-family:cascadia code">APP_SECRET=3d665533703b33ba74b953f9591fda38</span>
+  * <span style="font-family:cascadia code">MESSENGER_TRANSPORT_DSN=doctrine://default?auto_setup=0</span>
+  * <span style="font-family:cascadia code">DATABASE_URL="mysql://**votre nom d'utilisateur**:**votre mot de passe**.**votre hôte**:3306/**app**?**version du serveur**&**jeu de caractère**"</span>
+    * **votre nom d'utilisateur** : nom d'utilisateur sur le SGBDR
+    * **votre mot de passe** : mot de passe du SGBDR
+    * **votre hôte** : adresse ip. ex : 127.0.0.1 )
+    * **app** : nom de votre application. ex: quai-antique
+    * **version du serveur** : disponible sur phpMyadmin ou en tapant mariadb --v dans un terminal. ex: 10.4.24-MariaDB
+    * **jeu de caractère** : ex: utf8mb4
 * Pour créer la base de données, l'utilisateur **admin** et le schéma des tables, exécuter le fichier 'dumpsql2.sql' situé dans le répertoire <span style="font-family:cascadia code">quai-antique/SQL</span>
 * Pour peupler la table de données factices, exécuter le dossier 'populate.sql' situé dans ce même répertoire
 
