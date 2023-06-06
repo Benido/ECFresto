@@ -1,0 +1,30 @@
+#sidebar {
+  z-index: 10;
+  padding-bottom: 700px;
+}
+
+#sidebar-button {
+  width: 30px;
+  height: 100%;
+  position: relative;
+}
+
+#dimmed_screen {
+  position: fixed;
+  width: 100vw;
+  height: 100%;
+  background-color: rgba(231,226,220,0.7);
+  z-index: 9;
+  display: none;
+}
+
+#sidebar-button > div {
+  position: fixed;
+  top: 200px;
+
+}
+
+#admin_sidebar > a:hover {
+  background-color: $beige-clair;
+  color: $bronze;
+}

@@ -2,14 +2,15 @@
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css");
 
 //set the font colors
-$beige: #B6AC97;
+$beige: #b6ac97;
 $beige-clair:#e7e2dc;
 
-$bistre: #392C1E;
+$bistre: #392c1e;
 $bronze: #906427;
 
 @import 'header';
 @import 'footer';
+@import 'sidebar';
 
 //Set the font-families
 @font-face {
@@ -70,8 +71,6 @@ input[type=checkbox] {
     margin-left: 0.5rem;
 }
 
-#sidebar {
-}
 
 
 
