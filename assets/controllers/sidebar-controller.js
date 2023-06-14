@@ -16,9 +16,5 @@ export default class extends Controller {
             chevron.removeClass('bi-chevron-compact-right').addClass('bi-chevron-compact-left')
         })
     }
-
-    switchChevron() {
-
-    }
 }
 

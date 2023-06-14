@@ -1,0 +1,20 @@
+#delete {
+  background-color: #dc3545;
+}
+
+#plus_icon {
+  cursor: pointer;
+}
+
+#image_form_imageFile_delete, label[for='image_form_imageFile_delete'] {
+  display: none;
+}
+
+.card-body {
+  padding: 0;
+}
+
+.bottom-border-radius {
+  border-bottom-left-radius: calc(0.375rem - 1px);
+  border-bottom-right-radius: calc(0.375rem - 1px)
+}

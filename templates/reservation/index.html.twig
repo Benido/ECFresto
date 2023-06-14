@@ -1,6 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ReservationController!{% endblock %}
+{% block title %}Réservation{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('reservation') }}
+{% endblock %}
 
 {% block body %}
 <div class="container py-5">
@@ -10,7 +14,7 @@
         Pour tout retard de plus de 20 minutes, votre table sera donnée à un autre client !</p>
         <form id="reservation_form" name="{{ field_name(reservation) }}" method="post"  data-controller="time-slot">
             <div id="reservation_seats_day_selection" class="row row-cols-1 row-cols-lg-2 my-3">
-                <div class="col py-3">
+                <div class="col my-3">
                     <select id="reservation_seats_number"
                             name="{{ field_name(reservation.seats_number) }}"
                             data-action="change->time-slot#updateTimeSlots"
@@ -23,7 +27,7 @@
                         {% endfor %}
                     </select>
                 </div>
-                <div class="col">
+                <div class="col my-3">
                     {{ form_row(reservation.day, {
                         'attr': {
                             'data-action': 'change->time-slot#updateTimeSlots',
@@ -31,12 +35,12 @@
                         }}) }}
                 </div>
             </div>
-            <div id="reservation_time_slots" class="row my-3">
+            <div id="reservation_time_slots" class="row row-cols-4 row-cols-md-6 row-cols-lg-8 row-cols-xl-10 my-3">
                 {% if reservation.date.date.children is empty %}
                     <p class="h5 text-bronze text-center mt-5">Pas de créneaux disponibles</p>
                 {% else %}
                     {% for key, item in reservation.date.date.children %}
-                        <div class=" col-3 col-md-2 col-lg-1">
+                        <div class=" col">
                             <input
                                     type="radio"
                                     name="{{ item.vars.full_name }}"
@@ -46,7 +50,7 @@
                                     data-action="click->time-slot#revealClientInfoPart"
                                     value="{{ item.vars.value }}" >
                             <label  for="{{ item.vars.id }}"
-                                    class="btn bg-bronze text-light px-4 py-2 m-1">
+                                    class="btn text-light my-1 d-block">
                                 {{ item.vars.label }}
                             </label>
                         </div>

@@ -1,9 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Accueil Le Quai Antique{% endblock %}
+
 {% block stylesheets %}
     {{ parent() }}
-    {{ encore_entry_link_tags('homepage_styles') }}
+    {{ encore_entry_link_tags('homepage') }}
 {% endblock %}
 
 {% block body %}
@@ -27,8 +28,8 @@
             </div>
         </div>
     </section>
-    <section id="mise_en_avant" class="my-3 p-3">
-        <div class="row row-cols-1 row-cols-md-2 my-3 bg-light">
+    <section id="mise_en_avant" class="my-3">
+        <div class="row my-3 bg-light">
             <div class="col d-flex flex-column justify-content-center p-3">
                 <h2>
                     <small class="text-bronze">Bienvenue dans la Savoie de </small><br/>
@@ -39,7 +40,7 @@
                     Arcu non sodales neque sodales ut etiam sit.
                 </p>
             </div>
-            <div class="col d-flex justify-content-center">
+            <div class="col col-12 col-md-auto d-flex justify-content-center p-0">
                 <img src="{{ asset('images/accueil/redcharlie-redcharlie1-t-7KEq9M0b0-unsplash.webp') | imagine_filter('thumb_300') }}"
                      class="img-fluid"
                      alt="Chef Arnaud Michant au travail">
@@ -78,7 +79,9 @@
             {% endfor %}
         </div>
         <div class="d-flex justify-content-center my-3">
-            <a href="{{ path('app_reservation') }}" type="button" class="btn bg-bronze btn-lg text-light">Réserver</a>
+            <div id="reservation_button" class="d-grid">
+            <a href="{{ path('app_reservation') }}" type="button" class="btn bg-bronze text-light fs-3">Réserver</a>
+            </div>
         </div>
     </section>
 

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello BusinessHoursUpdateController!{% endblock %}
+{% block title %}Éditer les horaires{% endblock %}
 
 {% block sidebar %}
     {% include('fragments/layout/_admin_sidebar.html.twig')%}
@@ -10,7 +10,7 @@
     <div class="container p-5">
         <div class="row row-cols-1 row-cols-lg-2">
             <div class="col justify-content-center p-3" >
-                <h3 class="text-bronze mb-5">EDITER HORAIRES</h3>
+                <h3 class="text-bronze mb-5">ÉDITER LES HORAIRES</h3>
                 <ul class="list-group">
                 {% for key, hours in weeklyBusinessHours %}
                     <li    class="list-group-item my-2"
