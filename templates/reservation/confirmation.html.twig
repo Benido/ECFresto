@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Confirmation de réservation{% endblock %}
+
+{% block body %}
+<div class="container py-5">
+    <h2 class="my-5"><span class="text-bronze">Merci pour votre réservation.</span><br/>Vous recevrez bientôt un email de confirmation.</h2>
+    <div class="my-5 row justify-content-center">
+        <div class="col col-md-auto d-flex flex-column align-items-center p-5 bg-light">
+            <h4 class="my-3 text-bronze">Votre réservation</h4>
+            <div class="ps-2">
+                <p class="hind fw-bold"> Nombre de convives : <span class="ps-1 fw-normal">{{ reservation.getSeatsNumber }}</span></p>
+                <p class="hind fw-bold">Date : <span class="ps-1 fw-normal">{{ reservation.getLocaleDate }}</span></p>
+                <p class="hind fw-bold">Email : <span class="ps-1 fw-normal">{{ reservation.email }}</span></p>
+                {% if reservation.allergens %}
+                    <p class="hind fw-bold">Allergènes : {% for allergen in reservation.allergens %} <span class="ps-1 fw-normal">{{ allergen.title}}</span> {% endfor%}</p>
+                {% endif %}
+                {% if reservation.comment %}
+                    <p class="hind fw-bold">Commentaire : <span class="ps-1 fw-normal">{{ reservation.comment }}</span></p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col text-center"><a href="{{ path('app_reservation') }}" class="text-bronze">Je souhaite effectuer une nouvelle réservation</a></div>
+        <div class="col text-center"><a href="{{ path('app_homepage') }}" class="text-bronze">Retour à la page d'accueil</a></div>
+    </div>
+</div>
+{% endblock %}
+
+
+

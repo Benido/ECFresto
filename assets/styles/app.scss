@@ -47,8 +47,16 @@ h1, h2, h3, h4, h5, h6, .nav-link {
     font-family: $headings-font-family;
 }
 
-small, input, label {
+small, input, label, .hind {
     font-family: "Hind Madurai", sans-serif;
+}
+
+a{
+    color: $bronze
+}
+
+a:hover, a:active  {
+    color: $bistre
 }
 
 .bg-beige-clair { background-color: $beige-clair; }
