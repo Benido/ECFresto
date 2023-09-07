@@ -37,7 +37,7 @@
             </div>
             <div id="reservation_time_slots" class="row row-cols-4 row-cols-md-6 row-cols-lg-8 row-cols-xl-10 my-3">
                 {% if reservation.date.date.children is empty %}
-                    <p class="h5 text-bronze text-center mt-5">Pas de créneaux disponibles</p>
+                    <p class="h5 text-bronze text-center text-nowrap mt-5">Pas de créneaux disponibles</p>
                 {% else %}
                     {% for key, item in reservation.date.date.children %}
                         <div class=" col">

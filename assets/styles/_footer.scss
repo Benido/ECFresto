@@ -1,10 +1,22 @@
+#footer_container {
+  min-height: 442.033px;
+}
+
+@media (max-width: 992px) {
+  #footer_container {
+    min-height: 650px;
+  }
+}
+
 footer {
   background-color: $bistre;
   color: $beige;
   z-index: 20;
+  bottom: 0px;
 }
 
 footer > .h2 {
   font-family: 'Dancing Script', serif;
 }
+
 
