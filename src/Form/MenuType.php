@@ -21,8 +21,11 @@ class MenuType extends AbstractType
                 [
                     'class' => Dish::class,
                     'choice_label' => 'title',
+                    'group_by' => function($choice) {
+                        return $choice->getCategory()->getTitle();
+                    },
                     'multiple' => true,
-                    'expanded' => true
+                    'expanded' => false
                 ]
             )
             ->add('submit',SubmitType::class, ['label' => 'Enregistrer'])
