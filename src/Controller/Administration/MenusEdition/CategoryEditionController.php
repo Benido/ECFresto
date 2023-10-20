@@ -12,8 +12,13 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class CategoryEditionController extends AbstractController
 {
-    #[Route('/administration/publier-menus/editer-categorie-{id}', name: 'app_administration_editer-categorie', methods: 'POST')]
-    public function editCategory(Request $request, DishCategoryRepository $categoryRepository, ?int $id): Response
+    #[Route('/administration/publier-menus/editer-categorie-{id}',
+        name: 'app_administration_editer-categorie',
+        methods: 'POST')]
+    public function editCategory(
+        Request $request,
+        DishCategoryRepository $categoryRepository,
+        ?int $id): Response
     {
         $category = $categoryRepository->find($id);
         $editCategoryForm = $this->createForm(DishCategoryType::class, $category, [

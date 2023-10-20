@@ -27,7 +27,9 @@ class Formula
     #[ORM\Column]
     private ?float $price = null;
 
-    #[ORM\ManyToOne(inversedBy: 'formulas')]
+    #[ORM\ManyToOne(
+        cascade: ['persist'],
+        inversedBy: 'formulas')]
     private ?Menu $menu = null;
 
     public function getId(): ?int

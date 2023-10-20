@@ -24,7 +24,12 @@ class GalleryEditionController extends AbstractController
     }
 
     #[Route('/administration/modifier-galerie/editer/{id}', name: 'app_administration_modifier_galerie_editer')]
-    public function edit(Request $request, int $id, ImageRepository $imageRepository, CacheManager $cacheManager, UploaderHelper $helper): Response
+    public function edit(
+        Request $request,
+        int $id,
+        ImageRepository $imageRepository,
+        CacheManager $cacheManager,
+        UploaderHelper $helper): Response
     {
         $image = $imageRepository->find($id);
         $form = $this->createForm(ImageFormType::class, $image, [
@@ -38,9 +43,7 @@ class GalleryEditionController extends AbstractController
                 //cacheManager gère le cache de LiipImagine et helper est une classe de VichUploader
                 $cacheManager->remove($helper->asset($image, 'imageFile'));
             }
-           ;
             $imageRepository->save($image, true);
-
             return $this->redirectToRoute('app_administration_modifier_galerie');
         }
         return $this->render('fragments/form/_image_form.html.twig', [

@@ -1,6 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ReservationController!{% endblock %}
+{% block title %}Réservation{% endblock %}
+{% block name %}"Réservation"{% endblock %}
+{% block contentDescription %}"Réservez une table"{% endblock %}
 
 {% block body %}
 <div class="container py-5">
@@ -10,7 +12,7 @@
         Pour tout retard de plus de 20 minutes, votre table sera donnée à un autre client !</p>
         <form id="reservation_form" name="{{ field_name(reservation) }}" method="post"  data-controller="time-slot">
             <div id="reservation_seats_day_selection" class="row row-cols-1 row-cols-lg-2 my-3">
-                <div class="col py-3">
+                <div class="col mb-3">
                     <select id="reservation_seats_number"
                             name="{{ field_name(reservation.seats_number) }}"
                             data-action="change->time-slot#updateTimeSlots"

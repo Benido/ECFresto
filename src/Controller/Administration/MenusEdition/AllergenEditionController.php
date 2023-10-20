@@ -12,8 +12,12 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class AllergenEditionController extends AbstractController
 {
-    #[Route('/administration/publier-menus/editer-allergene-{id}', name: 'app_administration_editer-allergene', methods: 'POST')]
-    public function editAllergen(Request $request, AllergenRepository $allergenRepository, int $id): Response
+    #[Route('/administration/publier-menus/editer-allergene-{id}',
+        name: 'app_administration_editer-allergene',
+        methods: 'POST')]
+    public function editAllergen(Request $request,
+                                 AllergenRepository $allergenRepository,
+                                 int $id): Response
     {
         $allergen = $allergenRepository->find($id);
         $editAllergenForm = $this->createForm(AllergenType::class, $allergen, [
@@ -28,9 +32,7 @@ class AllergenEditionController extends AbstractController
         }
 
         return $this->render('/fragments/form/_allergen_form.html.twig',
-            [
-                'editAllergenForm' => $editAllergenForm,
-            ]
+            ['editAllergenForm' => $editAllergenForm]
         );
     }
 

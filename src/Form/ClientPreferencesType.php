@@ -88,6 +88,7 @@ class ClientPreferencesType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
+            'sanitize_html' => true,
             'data_class' => Client::class,
             'client' => null,
         ]);

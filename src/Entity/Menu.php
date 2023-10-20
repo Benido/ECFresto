@@ -18,7 +18,10 @@ class Menu
     #[ORM\Column(length: 100)]
     private ?string $title = null;
 
-    #[ORM\OneToMany(mappedBy: 'menu', targetEntity: Formula::class)]
+    #[ORM\OneToMany(
+        mappedBy: 'menu',
+        targetEntity: Formula::class,
+        cascade: ['persist', 'remove'])]
     private Collection $formulas;
 
     #[ORM\ManyToMany(targetEntity: Dish::class, inversedBy: 'menus')]

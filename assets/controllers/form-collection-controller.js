@@ -3,13 +3,11 @@ import { Controller } from '@hotwired/stimulus';
 //Ajoute les formulaires permettant d'éditer les horaires d'une journée précise
 export default class extends Controller {
     static targets = ["collectionContainer"]
-
     static values = {
         index    : Number,
         prototype: String,
         weekday  : String,
     }
-
 
     //Ajoute un nouveau formulaire lors du clic sur le bouton "Ajouter"
     addCollectionElement()
@@ -38,6 +36,7 @@ export default class extends Controller {
         removeButton.innerHTML = "Enlever"
         removeButton.classList.add('btn', 'bg-bronze', 'text-light', 'm-2')
         item.appendChild(removeButton)
+        const formCount = this.collectionContainerTarget.childElementCount
         removeButton.addEventListener('click', () => item.remove())
     }
 
@@ -80,5 +79,4 @@ export default class extends Controller {
             selector.value = this.weekdayValue
         }
     }
-
 }

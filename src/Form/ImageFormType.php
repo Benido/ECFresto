@@ -22,7 +22,7 @@ class ImageFormType extends AbstractType
                 'constraints' => [
                     new  Assert\File([
                     'maxSize' => '4096k',
-                    'maxSizeMessage' => 'La taille maximum autorisée pour une image est de 2 MO',
+                    'maxSizeMessage' => 'La taille maximum autorisée pour une image est de 4 MO',
                     'uploadErrorMessage' => 'Une erreur est survenue lors du chargement',
                     'mimeTypes' => [
                         'image/jpeg',

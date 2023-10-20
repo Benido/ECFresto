@@ -11,7 +11,7 @@ export default class extends Controller {
         const addButton = document.getElementById('add')
         const formContainer = document.getElementById('formContainer')
 
-        //temporary. Click the "Ajouter" button have a form already opened when it's revealed
+        //Click the "Ajouter" button have a form already opened when it's revealed
         for (const form of  forms.querySelectorAll('li')) {
             form.remove()
         }
@@ -19,6 +19,5 @@ export default class extends Controller {
         addButton.click()
         forms.removeAttribute('hidden')
     }
-
 }
 
