@@ -52,7 +52,7 @@ class GalleryEditionController extends AbstractController
     }
 
 
-    #[Route('/administration/modifier-galerie/supprimer/{image}', name: 'app_administration_modifier_galerie_supprimer')]
+    #[Route('/administration/modifier-galerie/supprimer/{image}', name: 'app_administration_modifier_galerie_supprimer', methods: ['POST'])]
     public function delete(Image $image, ImageRepository $imageRepository, CacheManager $cacheManager, UploaderHelper $helper): Response
     {
         $cacheManager->remove($helper->asset($image, 'imageFile'));

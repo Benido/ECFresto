@@ -18,6 +18,13 @@ liip_imagine:
                     size: [300, 300]
                     mode: 'inset'
 
+        panorama_300:
+            quality: 75
+            filters:
+                thumbnail:
+                    size: [ 800, 300 ]
+                    mode: 'inset'
+
         medium_400:
             quality: 75
             filters:

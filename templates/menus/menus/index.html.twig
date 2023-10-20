@@ -22,7 +22,7 @@
                     <h2 class="text-center mb-3">{{ category.getTitle }}</h2>
                     {% for dish in dishes %}
                         {% if dish.getCategory.getTitle == category.getTitle %}
-                            <div class="row px-2 m-1 ms-2">
+                            <div class="row px-2 ms-2 bg-light">
                                 <div class="col">
                                     <h3 class="h5 mt-3">{{ dish.getTitle }}</h3>
                                     <div><em>{{ dish.getDescription }}</em></div>

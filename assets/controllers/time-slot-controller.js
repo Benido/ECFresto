@@ -12,8 +12,6 @@ export default class extends Controller {
             type: $form.attr('method'),
             data :
                 {   //On simule le contenu du formulaire mais on ajoute que les valeur des champs 'day' et 'seats_number'
-                    //'reservation[day]': day.val(),
-                    //'reservation[seats_number]': seats.val()
                     'day': $day.val(),
                     'seats': $seats.val()
                 },

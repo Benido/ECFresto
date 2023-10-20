@@ -14,9 +14,9 @@
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </head>
-    <body class="min-vh-100 min-vw-100 pt-5">
+    <body class="min-vh-100 min-vw-100 pt-5 d-flex flex-column">
         {% include 'fragments/layout/_header.html.twig' %}
-        <div class="d-flex">
+        <div class="h-100 flex-fill">
         {% block sidebar%}{% endblock%}
         {% block body %}{% endblock %}
         </div>

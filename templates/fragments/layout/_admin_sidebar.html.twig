@@ -1,13 +1,20 @@
-<div id="sidebar" class="d-flex bg-beige position-fixed">
-    <nav id="admin-sidebar" class="nav flex-column collapse collapse-horizontal pt-3">
-        <a class="nav-link text-beige-clair" href="{{ path('app_administration_modifier_galerie') }}">Modifier galerie</a>
-        <a class="nav-link text-beige-clair" href="{{path('app_administration_publier_menus')}}">Publier les menus</a>
-        <a class="nav-link text-beige-clair" href="{{ path('app_administration_business_hours_update') }}">Éditer les horaires</a>
-        <a class="nav-link text-beige-clair" href="{{ path('app_administration_admin') }}">Préférences Admin</a>
+<div id="dimmed_screen"></div>
+<div id="sidebar" class="d-flex bg-beige position-fixed h-100">
+    <nav id="admin_sidebar" class="nav flex-column collapse collapse-horizontal pt-3">
+        <a class="nav-link text-bistre my-3 text-nowrap" href="{{ path('app_administration_modifier_galerie') }}">MODIFIER LA GALERIE</a>
+        <a class="nav-link text-bistre my-3 text-nowrap" href="{{path('app_administration_publier_menus')}}">PUBLIER LES MENUS</a>
+        <a class="nav-link text-bistre my-3 text-nowrap" href="{{ path('app_administration_business_hours_update') }}">ÉDITER LES HORAIRES</a>
+        <a class="nav-link text-bistre my-3 text-nowrap" href="{{ path('app_administration_admin') }}">PRÉFÉRENCES</a>
     </nav>
     <div role="button"
+         id="sidebar-button"
          data-bs-toggle="collapse"
-         data-bs-target="#admin-sidebar"
+         data-bs-target="#admin_sidebar"
+         data-controller="sidebar"
          aria-expanded="false"
-         style="width: 30px; height: 100vh"></div>
+         class="d-flex justify-content-center">
+        <div class="text-center">
+            <i class="bi bi-chevron-compact-right fs-3"></i>
+        </div>
+    </div>
 </div>

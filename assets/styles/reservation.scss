@@ -1,0 +1,29 @@
+@media (min-width: 992px) {
+  .row-cols-lg-8 > * {
+    flex:0 0 auto;
+    width:12.5%
+  }
+}
+
+@media (min-width: 1200px) {
+  .row-cols-xl-10 > * {
+    flex:0 0 auto;
+    width:10%
+  }
+}
+
+@media (min-width: 1400px) {
+  .row-cols-xxl-12 > * {
+    flex: 0 0 auto;
+    width: 8.3333333%
+  }
+}
+
+#reservation_date_recap_text + i {
+  cursor: pointer;
+}
+
+.btn-check + .btn:hover, .btn-check:checked + .btn {
+  background-color: mix(black, #906427, 20%);
+}
+

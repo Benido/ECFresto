@@ -28,49 +28,61 @@
                     </div>
                 </div>
                 <div class="col d-flex flex-column justify-content-center mt-5 mt-lg-0">
-                    <h3>Notre concept</h3>
+                    <h2>Notre concept</h2>
                     <p>Ultricies mi quis hendrerit dolor magna eget est. Ut pharetra sit amet aliquam id diam maecenas ultricies.
                         Lorem ipsum dolor sit amet consectetur adipiscing elit duis. Pellentesque dignissim enim sit amet venenatis.
                         Suspendisse potenti nullam ac tortor vitae purus faucibus ornare suspendisse.</p>
                 </div>
             </div>
         </section>
-        <section id="chef" class="my-5 p-3 bg-light">
-            <div class="row row-cols-1 row-cols-lg-2">
-                <div class="col d-flex flex-column justify-content-center mb-5 mb-lg-0">
-                    <h3>Le chef</h3>
+        <section id="chef" class="my-5 ps-3 bg-light">
+            <div class="row align-items-center">
+                <div class="col mb-5 mb-lg-0 py-3">
+                    <h2>Le chef</h2>
                     <p>Tortor id aliquet lectus proin nibh nisl condimentum id. Molestie at elementum eu facilisis sed odio morbi.
-                        Id diam vel quam elementum pulvinar etiam non quam lacus. Venenatis tellus in metus vulputate eu..</p>
+                        Id diam vel quam elementum pulvinar etiam non quam lacus. Venenatis tellus in metus vulputate eu.
+                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    <p class="text-end">Arnaud Michant</p>
                 </div>
-                <div class="col d-flex justify-content-center">
-                    <img src="{{ asset('images/restaurant/louis-hansel-v3olbe6-fhu-unsplash.webp') | imagine_filter('thumb_300') }}" alt="bar picture"></div>
+                <div class="col col-12 col-lg-auto d-flex justify-content-center">
+                    <img src="{{ asset('images/restaurant/louis-hansel-v3olbe6-fhu-unsplash.webp') | imagine_filter('medium_500') }}"
+                         alt="Arnaud Michant dans la cuisine"
+                         class=""
+                    ></div>
             </div>
         </section>
         <section id="equipe" class="my-5">
-            <div class="row row-cols-1 row-cols-lg-2 my-5">
-                    <div class="col d-flex flex-column align-items-center">
-                        <div class="ms-3">
-                            <h3>Votre hôte d'accueil</h3>
+            <h2>L'équipe</h2>
+            <div class="row row-cols-1 row-cols-xl-2 my-5">
+                    <div class="col d-flex flex-column flex-sm-row">
+                        <img src="{{ asset('images/restaurant/pexels-filip-rankovic-grobgaard-12276390-paysage.webp') | imagine_filter('thumb_300') }}"
+                             class="img-fluid"
+                             alt="l'hôte d'accueil" >
+                        <div class="ps-3 pt-3 d-flex flex-column justify-content-center bg-light">
+                            <h4>Votre hôte d'accueil</h4>
                             <p>Commodo viverra maecenas accumsan lacus vel. Sapien et ligula ullamcorper malesuada proin libero nunc.</p>
                         </div>
-                        <img src="{{ asset('images/restaurant/pexels-filip-rankovic-grobgaard-12276390.webp') | imagine_filter('thumb_300') }}"
-                             class="img-fluid mt-3 mb-5 mb-lg-0"
-                             alt="l'hôte d'accueil" >
                     </div>
-                    <div class="col d-flex flex-column align-items-center">
-                        <div class="">
-                            <h3>Votre sommelière</h3>
+                    <div class="col d-flex flex-column flex-sm-row mt-3 mt-xl-0">
+                        <img src="{{ asset('images/restaurant/monica-di-loxley-FDsvtPK6pwI-unsplash.webp') | imagine_filter('thumb_300') }}"
+                             class="img-fluid"
+                             alt="la sommelière" >
+                        <div class="ps-3 pt-3 d-flex flex-column justify-content-center bg-light">
+                            <h4>Votre sommelière</h4>
                             <p>Eu tincidunt tortor aliquam nulla facilisi cras. Mi in nulla posuere sollicitudin aliquam ultrices sagittis. Odio eu feugiat pretium nibh.</p>
                         </div>
-                        <img src="{{ asset('images/restaurant/monica-di-loxley-FDsvtPK6pwI-unsplash.webp') | imagine_filter('thumb_300') }}"
-                             class="img-fluid mt-3"
-                             alt="la sommelière" >
                 </div>
             </div>
-            <div class="row my-3">
-                <div class="col"></div>
+            <div class="row row-cols-1 my-3">
                 <div class="col">
-                    <img height="300">
+                    <h4>et tout le personnel du Quai Antique</h4>
+                    <p>Habitasse platea dictumst quisque sagittis purus sit amet. Blandit volutpat maecenas volutpat blandit aliquam etiam. Et tortor consequat id porta nibh venenatis cras sed</p>
+                </div>
+                <div class="col d-flex justify-content-center">
+                    <img src="{{ asset('images/restaurant/pexels-elevate-1267321.jpg') }}"
+                         height="300"
+                         class="img-fluid"
+                     alt="l'équipe du restaurant réunie autour d'une table">
                 </div>
             </div>
         </section>
