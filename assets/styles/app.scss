@@ -2,15 +2,14 @@
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css");
 
 //set the font colors
-$beige: #b6ac97;
+$beige: #B6AC97;
 $beige-clair:#e7e2dc;
 
-$bistre: #392c1e;
+$bistre: #392C1E;
 $bronze: #906427;
 
 @import 'header';
 @import 'footer';
-@import 'sidebar';
 
 //Set the font-families
 @font-face {
@@ -37,6 +36,7 @@ $font-family-base: "Lora", serif;
 $headings-font-family: "Montserrat", sans-serif;
 
 
+
 body {
     font-family: $font-family-base;
     background-color: $beige-clair;
@@ -47,16 +47,8 @@ h1, h2, h3, h4, h5, h6, .nav-link {
     font-family: $headings-font-family;
 }
 
-small, input, label, .hind {
+small, input, label {
     font-family: "Hind Madurai", sans-serif;
-}
-
-a{
-    color: $bronze
-}
-
-a:hover, a:active  {
-    color: $bistre
 }
 
 .bg-beige-clair { background-color: $beige-clair; }
@@ -79,23 +71,8 @@ input[type=checkbox] {
 }
 
 
-//Uniformise le style des boutons du site
 
-.btn {
-    background-color: $bronze;
-}
 
-.btn:hover {
-    --bs-btn-hover-bg: #{shade-color($bronze, 20%)};
-}
-
-//Empêche d'avoir un fond jaune pâle sur Chrome et Firefox lorsqu'une entrée texte est pré-remplie
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-input:-webkit-autofill:active{
-    -webkit-box-shadow: 0 0 0 30px white inset;
-}
 
 
 
