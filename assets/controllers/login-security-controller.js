@@ -7,9 +7,11 @@ export default class extends Controller {
     checkIfEmail() {
         const emailPattern = new RegExp(/^[-\w.]+@([-\w]+\.)+[-\w]{2,4}$/gm)
         if(!this.emailInputTarget.value.match(emailPattern)) {
-            this.emailErrorTarget.textContent = "Entrez une adresse email valide"
+            this.emailInputTarget.setCustomValidity("Veuillez entrer une adresse email valide")
+            this.emailErrorTarget.textContent = "Veuillez entrer une adresse email valide"
         } else {
             this.emailErrorTarget.textContent = ""
+            this.emailInputTarget.setCustomValidity("")
         }
     }
 
