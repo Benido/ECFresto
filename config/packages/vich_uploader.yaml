@@ -6,9 +6,12 @@ vich_uploader:
 
     mappings:
         images:
-            uri_prefix: /images
-            upload_destination: '%kernel.project_dir%/public/images'
+            uri_prefix: /images/galerie
+            upload_destination: '%kernel.project_dir%/public/images/galerie'
             namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
 
     #mappings:
     #    products:
