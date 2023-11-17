@@ -32,7 +32,7 @@
                         {# Le wrapper contenant le formulaire créé par l'appel Ajax #}
                         <div id="image_form_{{ image.getId }}" class=""></div>
                         <div class="d-flex justify-content-center align-items-center">
-                            <img src="{{ vich_uploader_asset(image, 'imageFile') | imagine_filter(('thumb_200')) }}"
+                            <img src="{{ vich_uploader_asset(image, 'imageFile') | imagine_filter(('masonry_thumb')) }}"
                                  alt="..."
                                  class="img-fluid"
                                  data-action="click->image-edition#getForm">

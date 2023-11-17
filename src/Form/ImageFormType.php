@@ -19,6 +19,7 @@ class ImageFormType extends AbstractType
                 'required' => false,  //pour ne pas redemander un upload du fichier pour une simple édition
                 'image_uri' => false,
                 'download_uri' => false,
+                'imagine_pattern' => 'masonry_thumb',
                 'constraints' => [
                     new  Assert\File([
                     'maxSize' => '4096k',

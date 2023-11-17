@@ -38,7 +38,6 @@ class GalleryEditionController extends AbstractController
                 //cacheManager gère le cache de LiipImagine et helper est une classe de VichUploader
                 $cacheManager->remove($helper->asset($image, 'imageFile'));
             }
-           ;
             $imageRepository->save($image, true);
 
             return $this->redirectToRoute('app_administration_modifier_galerie');

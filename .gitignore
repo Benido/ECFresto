@@ -1,5 +1,6 @@
 
 /public/media/
+/public/images/galerie/
 ###> symfony/framework-bundle ###
 .env
 .env.prod
